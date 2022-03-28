@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+IKEYTRGLCHZQHO	InChI=1S/C8H9NO3/c1-6-2-3-8(9(11)12)7(4-6)5-10/h2-4,10H,5H2,1H3	C8H9NO3	1	-73.0753429867762	5-Methyl-2-nitrobenzyl alcohol	CC1=CC(=C(C=C1)[N+](=O)[O-])CO	1.80992222		PubChem:(568847); NORMAN:(NS00052572); additional:(null); Training Set:(null)	0.536200257971156	802818	1418	1370_PL20210630_1418

@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+MRULQDAIEXRSFI	InChI=1S/C9H6O3/c10-8-4-1-7(2-5-8)3-6-9(11)12/h1-2,4-5,10H,(H,11,12)	C9H6O3	1	-114.30043079570918	2-Propynoic acid, 3-(4-hydroxyphenyl)-	C1=CC(=CC=C1C#CC(=O)O)O	1.70000005		PubChem:(10725670); YMDB Mine:(null); EcoCyc Mine:(null); KEGG Mine:(null)	0.3901532906165133	60129542146	1766	1689_PL20210630_1766

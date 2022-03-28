@@ -1,0 +1,177 @@
+ 
+  -OEChem-10192103552D
+
+ 31 32  0     1  0  0  0  0  0999 V2000
+    4.3378    3.0425    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    5.9206    0.2515    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    1.9610   -0.2809    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    4.8945   -2.5675    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    7.2474    1.3649    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    3.8600    1.0939    0.0000 C   0  0  1  0  0  0  0  0  0  0  0  0
+    2.4610    0.5851    0.0000 C   0  0  2  0  0  0  0  0  0  0  0  0
+    3.6012    2.0599    0.0000 C   0  0  2  0  0  0  0  0  0  0  0  0
+    4.9358    0.0779    0.0000 C   0  0  2  0  0  0  0  0  0  0  0  0
+    2.2022    1.5510    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    5.6198    1.9573    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5938   -0.8618    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    6.2626    1.1912    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    5.2366   -1.6278    0.0000 C   0  0  3  0  0  0  0  0  0  0  0  0
+    6.2214   -1.4542    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    4.0800    0.2729    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8595    0.1101    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.3812    2.8809    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.3343   -0.3971    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.6083    1.3733    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0073    2.1396    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.4973    2.5651    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.1785    2.2261    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.1952   -1.3367    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.0568   -0.5518    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.6260   -1.7355    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.3410   -0.2809    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.1137   -0.8436    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.8319   -1.3465    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.3290   -2.0648    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.2931   -3.0425    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+  1  6  1  0  0  0  0
+  1  8  1  0  0  0  0
+  2  9  1  0  0  0  0
+  2 13  1  0  0  0  0
+  7  3  1  1  0  0  0
+  3 27  1  0  0  0  0
+  4 14  1  0  0  0  0
+  4 31  1  0  0  0  0
+  5 13  2  0  0  0  0
+  6  7  1  0  0  0  0
+  6  9  1  0  0  0  0
+  6 16  1  1  0  0  0
+  7 10  1  0  0  0  0
+  7 17  1  0  0  0  0
+  8 10  1  0  0  0  0
+  8 11  1  0  0  0  0
+  8 18  1  6  0  0  0
+  9 12  1  1  0  0  0
+  9 19  1  0  0  0  0
+ 10 20  1  0  0  0  0
+ 10 21  1  0  0  0  0
+ 11 13  1  0  0  0  0
+ 11 22  1  0  0  0  0
+ 11 23  1  0  0  0  0
+ 12 14  1  0  0  0  0
+ 12 24  1  0  0  0  0
+ 12 25  1  0  0  0  0
+ 14 15  1  0  0  0  0
+ 14 26  1  0  0  0  0
+ 15 28  1  0  0  0  0
+ 15 29  1  0  0  0  0
+ 15 30  1  0  0  0  0
+M  END
+> <PUBCHEM_COMPOUND_CID>
+9859216
+
+> <PUBCHEM_COMPOUND_CANONICALIZED>
+1
+
+> <PUBCHEM_CACTVS_COMPLEXITY>
+254
+
+> <PUBCHEM_CACTVS_HBOND_ACCEPTOR>
+5
+
+> <PUBCHEM_CACTVS_HBOND_DONOR>
+2
+
+> <PUBCHEM_CACTVS_ROTATABLE_BOND>
+2
+
+> <PUBCHEM_CACTVS_SUBSKEYS>
+AAADceBwOAAAAAAAAAAAAAAAAAAAASAAAAAAAAAABIASAAAAAAAAGgAACAAACBSggAICCAAABgAIAACQCAAAAAAAAAAAAAEAAAABEBYAAAACQAAFIAADAAHI7KzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+
+> <PUBCHEM_IUPAC_OPENEYE_NAME>
+(1S,2S,6R,8S)-8-hydroxy-2-(2-hydroxypropyl)-3,9-dioxabicyclo[4.2.1]nonan-4-one
+
+> <PUBCHEM_IUPAC_CAS_NAME>
+(1S,2S,6R,8S)-8-hydroxy-2-(2-hydroxypropyl)-3,9-dioxabicyclo[4.2.1]nonan-4-one
+
+> <PUBCHEM_IUPAC_NAME_MARKUP>
+(1<I>S</I>,2<I>S</I>,6<I>R</I>,8<I>S</I>)-8-hydroxy-2-(2-hydroxypropyl)-3,9-dioxabicyclo[4.2.1]nonan-4-one
+
+> <PUBCHEM_IUPAC_NAME>
+(1S,2S,6R,8S)-8-hydroxy-2-(2-hydroxypropyl)-3,9-dioxabicyclo[4.2.1]nonan-4-one
+
+> <PUBCHEM_IUPAC_SYSTEMATIC_NAME>
+(1S,2S,6R,8S)-8-oxidanyl-2-(2-oxidanylpropyl)-3,9-dioxabicyclo[4.2.1]nonan-4-one
+
+> <PUBCHEM_IUPAC_TRADITIONAL_NAME>
+(1S,2S,6R,8S)-8-hydroxy-2-(2-hydroxypropyl)-3,9-dioxabicyclo[4.2.1]nonan-4-one
+
+> <PUBCHEM_IUPAC_INCHI>
+InChI=1S/C10H16O5/c1-5(11)2-8-10-7(12)3-6(14-10)4-9(13)15-8/h5-8,10-12H,2-4H2,1H3/t5?,6-,7+,8+,10+/m1/s1
+
+> <PUBCHEM_IUPAC_INCHIKEY>
+ACOYLHVUGSEGKA-CFMZZVMJSA-N
+
+> <PUBCHEM_XLOGP3_AA>
+-0.5
+
+> <PUBCHEM_EXACT_MASS>
+216.09977361
+
+> <PUBCHEM_MOLECULAR_FORMULA>
+C10H16O5
+
+> <PUBCHEM_MOLECULAR_WEIGHT>
+216.23
+
+> <PUBCHEM_OPENEYE_CAN_SMILES>
+CC(CC1C2C(CC(O2)CC(=O)O1)O)O
+
+> <PUBCHEM_OPENEYE_ISO_SMILES>
+CC(C[C@H]1[C@@H]2[C@H](C[C@@H](O2)CC(=O)O1)O)O
+
+> <PUBCHEM_CACTVS_TPSA>
+76
+
+> <PUBCHEM_MONOISOTOPIC_WEIGHT>
+216.09977361
+
+> <PUBCHEM_TOTAL_CHARGE>
+0
+
+> <PUBCHEM_HEAVY_ATOM_COUNT>
+15
+
+> <PUBCHEM_ATOM_DEF_STEREO_COUNT>
+4
+
+> <PUBCHEM_ATOM_UDEF_STEREO_COUNT>
+1
+
+> <PUBCHEM_BOND_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_BOND_UDEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ISOTOPIC_ATOM_COUNT>
+0
+
+> <PUBCHEM_COMPONENT_COUNT>
+1
+
+> <PUBCHEM_CACTVS_TAUTO_COUNT>
+-1
+
+> <PUBCHEM_COORDINATE_TYPE>
+1
+5
+255
+
+> <PUBCHEM_BONDANNOTATIONS>
+7  3  5
+14  4  3
+6  16  5
+8  18  6
+9  12  5
+
+$$$$

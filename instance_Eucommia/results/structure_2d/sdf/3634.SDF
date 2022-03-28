@@ -1,0 +1,189 @@
+ 
+  -OEChem-10192104002D
+
+ 37 38  0     1  0  0  0  0  0999 V2000
+    2.8660    1.8571    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    8.9962   -0.6704    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0000    0.3571    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    8.1244   -2.1671    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    5.4641   -0.6429    0.0000 C   0  0  3  0  0  0  0  0  0  0  0  0
+    5.4641    0.3571    0.0000 C   0  0  3  0  0  0  0  0  0  0  0  0
+    4.5981   -1.1429    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5981    0.8571    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320   -0.6429    0.0000 C   0  0  3  0  0  0  0  0  0  0  0  0
+    6.3580   -1.1776    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320    0.3571    0.0000 C   0  0  3  0  0  0  0  0  0  0  0  0
+    6.3580    0.8917    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    7.2641   -0.6637    0.0000 C   0  0  3  0  0  0  0  0  0  0  0  0
+    7.2641    0.3779    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660   -1.1429    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660    0.8571    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    8.1282   -1.1671    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    5.4593   -1.2629    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.4593    0.9771    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.1996   -1.6179    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.9966   -1.6179    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.9966    1.3320    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.1996    1.3320    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320   -1.2629    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.9534   -1.6474    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.7517   -1.6566    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320    0.9771    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.7517    1.3708    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.9534    1.3615    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    7.2605   -1.2837    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    7.8750    0.2718    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    7.4732    0.9616    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.5560   -0.6060    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.3291   -1.4529    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.1760   -1.6799    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.3291    2.1671    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    9.5319   -0.9825    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+  1 16  1  0  0  0  0
+  1 36  1  0  0  0  0
+  2 17  1  0  0  0  0
+  2 37  1  0  0  0  0
+  3 16  2  0  0  0  0
+  4 17  2  0  0  0  0
+  5  6  1  0  0  0  0
+  5  7  1  0  0  0  0
+  5 10  1  0  0  0  0
+  5 18  1  0  0  0  0
+  6  8  1  0  0  0  0
+  6 12  1  0  0  0  0
+  6 19  1  0  0  0  0
+  7  9  1  0  0  0  0
+  7 20  1  0  0  0  0
+  7 21  1  0  0  0  0
+  8 11  1  0  0  0  0
+  8 22  1  0  0  0  0
+  8 23  1  0  0  0  0
+  9 11  1  0  0  0  0
+  9 15  1  0  0  0  0
+  9 24  1  0  0  0  0
+ 10 13  1  0  0  0  0
+ 10 25  1  0  0  0  0
+ 10 26  1  0  0  0  0
+ 11 16  1  0  0  0  0
+ 11 27  1  0  0  0  0
+ 12 14  1  0  0  0  0
+ 12 28  1  0  0  0  0
+ 12 29  1  0  0  0  0
+ 13 14  1  0  0  0  0
+ 13 17  1  0  0  0  0
+ 13 30  1  0  0  0  0
+ 14 31  1  0  0  0  0
+ 14 32  1  0  0  0  0
+ 15 33  1  0  0  0  0
+ 15 34  1  0  0  0  0
+ 15 35  1  0  0  0  0
+M  END
+> <PUBCHEM_COMPOUND_CID>
+68564260
+
+> <PUBCHEM_COMPOUND_CANONICALIZED>
+1
+
+> <PUBCHEM_CACTVS_COMPLEXITY>
+325
+
+> <PUBCHEM_CACTVS_HBOND_ACCEPTOR>
+4
+
+> <PUBCHEM_CACTVS_HBOND_DONOR>
+2
+
+> <PUBCHEM_CACTVS_ROTATABLE_BOND>
+2
+
+> <PUBCHEM_CACTVS_SUBSKEYS>
+AAADceBwOAAAAAAAAAAAAAAAAAAAAAAAAAAwYAAAAAAAAADAAAAAGgAACAAADQCAgAACCAAAAgAIAACQCAAAAAAAAAAAAAEAAAAAABIAAAAAQAAEAAAAAAGIyPCOgAAAAAAAAACAAAQAACAAAAAAAAAAAA==
+
+> <PUBCHEM_IUPAC_OPENEYE_NAME>
+3-methyldecalin-2,6-dicarboxylic acid
+
+> <PUBCHEM_IUPAC_CAS_NAME>
+3-methyl-1,2,3,4,4a,5,6,7,8,8a-decahydronaphthalene-2,6-dicarboxylic acid
+
+> <PUBCHEM_IUPAC_NAME_MARKUP>
+3-methyl-1,2,3,4,4<I>a</I>,5,6,7,8,8<I>a</I>-decahydronaphthalene-2,6-dicarboxylic acid
+
+> <PUBCHEM_IUPAC_NAME>
+3-methyl-1,2,3,4,4a,5,6,7,8,8a-decahydronaphthalene-2,6-dicarboxylic acid
+
+> <PUBCHEM_IUPAC_SYSTEMATIC_NAME>
+3-methyl-1,2,3,4,4a,5,6,7,8,8a-decahydronaphthalene-2,6-dicarboxylic acid
+
+> <PUBCHEM_IUPAC_TRADITIONAL_NAME>
+3-methyldecalin-2,6-dicarboxylic acid
+
+> <PUBCHEM_IUPAC_INCHI>
+InChI=1S/C13H20O4/c1-7-4-10-5-9(12(14)15)3-2-8(10)6-11(7)13(16)17/h7-11H,2-6H2,1H3,(H,14,15)(H,16,17)
+
+> <PUBCHEM_IUPAC_INCHIKEY>
+YWQHFUCPHIOWHE-UHFFFAOYSA-N
+
+> <PUBCHEM_XLOGP3_AA>
+2.3
+
+> <PUBCHEM_EXACT_MASS>
+240.13615911
+
+> <PUBCHEM_MOLECULAR_FORMULA>
+C13H20O4
+
+> <PUBCHEM_MOLECULAR_WEIGHT>
+240.29
+
+> <PUBCHEM_OPENEYE_CAN_SMILES>
+CC1CC2CC(CCC2CC1C(=O)O)C(=O)O
+
+> <PUBCHEM_OPENEYE_ISO_SMILES>
+CC1CC2CC(CCC2CC1C(=O)O)C(=O)O
+
+> <PUBCHEM_CACTVS_TPSA>
+74.6
+
+> <PUBCHEM_MONOISOTOPIC_WEIGHT>
+240.13615911
+
+> <PUBCHEM_TOTAL_CHARGE>
+0
+
+> <PUBCHEM_HEAVY_ATOM_COUNT>
+17
+
+> <PUBCHEM_ATOM_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ATOM_UDEF_STEREO_COUNT>
+5
+
+> <PUBCHEM_BOND_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_BOND_UDEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ISOTOPIC_ATOM_COUNT>
+0
+
+> <PUBCHEM_COMPONENT_COUNT>
+1
+
+> <PUBCHEM_CACTVS_TAUTO_COUNT>
+-1
+
+> <PUBCHEM_COORDINATE_TYPE>
+1
+5
+255
+
+> <PUBCHEM_BONDANNOTATIONS>
+11  16  3
+13  17  3
+5  7  3
+6  12  3
+9  15  3
+
+$$$$

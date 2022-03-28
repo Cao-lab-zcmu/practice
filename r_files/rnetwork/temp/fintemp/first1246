@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+XVMJVOYXXOQPHK	InChI=1S/C9H10O3/c1-6-3-2-4-8(10)7(6)5-9(11)12/h2-4,10H,5H2,1H3,(H,11,12)	C9H10O3	1	-75.3217970277512	Benzeneacetic acid, 2-hydroxy-6-methyl-	CC1=C(C(=CC=C1)O)CC(=O)O	1.39999998		PubChem:(14519889); KEGG Mine:(null)	0.4577713655141079	8589934594	1246	1213_PL20210630_1246

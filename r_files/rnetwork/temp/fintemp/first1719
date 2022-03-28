@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+WUNYOHVNZQIDME	InChI=1S/C12H23N3O4/c13-9(11(16)17)5-1-3-7-15-8-4-2-6-10(14)12(18)19/h7,9-10H,1-6,8,13-14H2,(H,16,17)(H,18,19)	C12H23N3O4	1	-158.56808087990572	Dehydro-lys-nle	C(CCN=CCCCC(C(=O)O)N)CC(C(=O)O)N	-5.5999999	16929109	PubChem:(193137, 21126034, 53463599); MeSH:(193137); PubMed:(null)	0.3339790708442833	70	1719	1645_PL20210630_1719

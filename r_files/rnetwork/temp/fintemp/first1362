@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+QKGQHTCUNGPCIA	InChI=1S/C7H8O3/c1-4-2-6(9)7(10)3-5(4)8/h2-3,8-10H,1H3	C7H8O3	1	-90.90132509336293	Toluene-2,4,5-triol	CC1=CC(=C(C=C1O)O)O	1.20000005	8195105,9922262,12107140,18970513	PubChem:(70758); MeSH:(70758); CHEBI:(81668); KEGG:(C18317); Biocyc:(CPD-9136); ZINC bio:(ZINC02004396); NORMAN:(NS00021528); PubChem class - bio and metabolites:(null); PubMed:(null)	0.3705602272502449	17049958	1362	1323_PL20210630_1362

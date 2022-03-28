@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+ZCIXWIPMALYWJT	InChI=1S/C7H11NO4/c9-6(10)4-8-3-1-2-5(8)7(11)12/h5H,1-4H2,(H,9,10)(H,11,12)	C7H11NO4	1	-101.58261870535847	1-Pyrrolidineaceticacid, 2-carboxy-	C1CC(N(C1)CC(=O)O)C(=O)O	-2.29999995	15726176,16096274,19090510,19367724	PubChem:(15544534, 15544535, 45116053); PubMed:(null)	0.4848648400605688	66	1199	1166_PL20210630_1199

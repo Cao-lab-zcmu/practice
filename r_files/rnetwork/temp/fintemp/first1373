@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+UBLXQNDOZQESPG	InChI=1S/C8H9NO/c9-6-5-7-1-3-8(10)4-2-7/h1-6,10H,9H2	C8H9NO	1	-68.29699950393979	4-[(E)-2-aminoethenyl]phenol	C1=CC(=CC=C1C=CN)O	0.841386795		PubChem:(18705667, 54525424, 90658984); Biocyc:(CPD-16178); YMDB Mine:(null); EcoCyc Mine:(null); KEGG Mine:(null)	0.4199630235952226	60129544194	1373	1333_PL20210630_1373

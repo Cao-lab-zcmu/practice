@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+QLUPQWGVSUSFPS	InChI=1S/C6H9N3O3S/c1-13(12)5-4-8-3-2-7-6(8)9(10)11/h2-3H,4-5H2,1H3	C6H9N3O3S	1	-125.05870745486837	1-(2-methylsulfinylethyl)-2-nitroimidazole	CS(=O)CCN1C=CN=C1[N+](=O)[O-]	-0.290084749		PubChem:(100483); PubChem class - safety and toxic:(null)	0.33421583548457623	67108866	923	893_PL20210630_923

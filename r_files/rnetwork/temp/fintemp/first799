@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+QHFJSLSLEZTOTO	InChI=1S/CHN2O3P/c2-3-1-6-7(4)5/h1H/p+1	CHN2O3P	1	-96.11682197044107	null	C(=[N+]=[N-])O[P+](=O)O	-0.200000003		PubChem:(87236604, 87236605)	0.26573482472592136	2	799	773_PL20210630_799

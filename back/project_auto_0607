@@ -1,0 +1,133 @@
+#path1=
+#/media/wizard/Seagate/all_group/initial_8_neg_for_sirius_AllGroup_project
+#bin/bash
+#step1_fingerid
+ls -l | awk '/^d/ {print $NF}' > temp_name; \
+name=temp_name; \
+for filename in $(cat $name)
+do
+cat $filename/fingerid/*-.tsv | sort -t $'\t' -n -k 11 | uniq | sed 's/\r//g' | awk -F $'\t' -v OFS=$'\t' '{if(NR==1){print $0,"shared name"};if(NR>=2){print $0,"'$filename'"}}' > $filename/fingerid/sum.tsv; #| sed 's/\r//g' this revise end of line
+sort -t $'\t' -n -k 5 -r $filename/fingerid/sum.tsv > $filename/fingerid/score_sum.tsv
+cat $filename/fingerid/sum.tsv | sed -n '1p;$p' > $filename/fingerid/sum_first.tsv; 
+cat $filename/fingerid/score_sum.tsv | sed -n '1p;2p' > $filename/fingerid/score_sum_first.tsv;
+done;
+cat */fingerid/sum_first.tsv | sort -t $'\t' -n -k 11 | uniq >  temp_tani_sum.tsv
+cat */fingerid/score_sum_first.tsv | sort -t $'\t' -n -k 5 -r | uniq > temp_allscore_sum.tsv
+paste <(cut -d $'\t' -f 1-12 temp_tani_sum.tsv)  <(awk -F $'\t' -v OFS=$'\t' '{print $NF}' temp_tani_sum.tsv | awk -F _ '{print $NF}') > fin_tani_refor.tsv
+paste <(cut -d $'\t' -f 1-12 temp_allscore_sum.tsv)  <(awk -F $'\t' -v OFS=$'\t' '{print $NF}' temp_allscore_sum.tsv | awk -F _ '{print $NF}') > fin_score_refor.tsv
+
+rm temp*
+##################################################
+##################################################
+#step2_canopus
+#canopus.tsv
+cat tani_sum.tsv | awk -F $'\t' -v OFS=$'\t' '{print $3,$13} '| sed '1d' > Mo_Fo.tsv; \#ID and it's formula
+cat canopus.tsv | awk -F $'\t' '{print $1}' | sed '1d' > temp_canopus_index; \
+sumlist=Mo_Fo.tsv; \
+IFS_def=$IFS; \
+IFS=$'\n'; \
+for sumname in $(cat $sumlist)
+do
+molename=$(echo $sumname | awk -F $'\t' '{print $1}'); \
+idname=$(echo $sumname | awk -F $'\t' '{print $2}'); \
+paste -s temp_canopus_index $idname/canopus/$molename*.fpt | sed 's/\r//g' | awk -F $'\t' -v OFS=$'\t' '{if(NR==1){print $0, "shared name"};if(NR>=2){print $0,"'$idname'"}}' > $idname/canopus/temp_index_post_sum;
+done;\
+IFS=$IFS_def; \
+cat canopus.tsv | sed '1d' | awk -F $'\t' '{print $4}' | paste -s > temp_header; \
+cat */canopus/temp_index_post_sum | sort -t $'\t' -n -k 3 -r | uniq | sed '1d' > temp_allcanopus_sum; \
+cat temp_header temp_allcanopus_sum > title_canopus_sum.tsv; \
+rm temp* \
+rm */canopus/temp*
+#This file is too large to open with excel or other soft. So the following step is to filter the useless classification.
+#cat title_canopus_sum.tsv | awk '{if(NR==1){print}}' | sed 's/\t/\n/g' > line_search.tsv
+
+####################################################
+####################################################
+{
+cat canopus_summary.tsv | awk -F $'\t' -v OFS=$'\t' '{print $4}' | sed '1d' | sort -k 1 | uniq > spe_class.tsv; \
+cat canopus.tsv | awk -F $'\t' -v OFS='\t' '{print $4,$1}' | sed '1d' | sort -k 1 > tempjoin2.tsv; \
+join -a1 -o 2.2 -t $'\t' spe_class.tsv tempjoin2.tsv | sort -n > spe_index.tsv;  \
+cat spe_index.tsv | awk -F $'\t' -v OFS=$'\t' '{$1=$1+1; print $0}' > spe_index_plus1.tsv; \
+index=spe_index_plus1.tsv; \
+mkdir temp; \
+IFS_def=$IFS; \
+IFS=$'\n'; \
+for num in $(cat $index)
+do
+awk -F $'\t' -v OFS=$'\t' '{print $'$num'}' title_canopus_sum.tsv > temp/$num.temp
+done; \
+IFS=$IFS_def; \
+cat title_canopus_sum.tsv | awk -F $'\t' -v OFS=$'\t' '{print $NF}' > temp/id; \
+paste temp/*.tsv temp/id > temp/sum.tsv;\
+rm temp/*.temp;\
+}
+##################################################
+##################################################
+#That's all. But it is not seemed to be a ideal choice.
+#The following may more suitbale
+cat canopus_summary.tsv | awk -F $'\t' -v OFS=$'\t' '{print $4}' | sed '1d' | sort -k 1 | uniq > spe_class.tsv; \
+################################################
+################################################
+################################################
+index=test;#spe_class.tsv; \
+#here,the file above can be replaced.
+cat title_canopus_sum.tsv | awk '{if(NR==1){print}}' | sed 's/\t/\n/g' > temp_header.tsv; \
+mkdir temp2; \
+IFS_def=$IFS; \
+IFS=$'\n'; \
+for line_n in $(cat $index)
+do
+grep -F -i -n "$line_n" temp_header.tsv > temp2/temp$line_n
+done; \
+IFS=$IFS_def; \
+cat temp2/temp*| awk -F : -v OFS=$'\t' '{print $1}' | sort -n > temp2/awknum; \
+rm temp2/temp*; \
+num=temp2/awknum; \
+for numline in $(cat $num)
+do
+awk -F $'\t' -v OFS=$'\t' '{print $'$numline'}' title_canopus_sum.tsv > temp2/temp$numline
+done; \
+awk -F $'\t' -v OFS=$'\t' '{print $NF}' title_canopus_sum.tsv > temp2/_tempid; \
+paste temp2/temp* temp2/_tempid > out_se_canopus.tsv; \
+rm -r temp*;
+#################################
+#################################
+#step3_tanimotosimilarity_network;
+limit='0.9'; \
+a=$(awk 'END{print NF}' tanimoto.tsv)
+awk -F $'\t' -v OFS=$'\t' '{print $1}' tanimoto.tsv | awk -F _ -v OFS=$'\t' '{print $NF}' > temp_id
+paste temp_id <(cut -d $'\t' -f 2- tanimoto.tsv) | sed '1d' > temp_tani; \
+for (( i=2; i <= a; i++ ))
+do
+target=$( awk -F $'\t' -v OFS=$'\t' '{if(NR=='$i'){print}}' temp_id ); \
+awk -F $'\t' -v OFS=$'\t' '{print $1,"'$target'",$'$i'}' temp_tani | awk -F $'\t' -v OFS=$'\t' '$3>='$limit'&&$3<=0.999 {print}' >> temp_s_t.tsv
+done;
+########filter the repetition
+a=$(awk 'END{print NR}' temp_s_t.tsv); \
+for (( i=1; i <= a; i++ ))
+do
+awk -F $'\t' -v OFS=$'\t' '{if(NR=='$i'){print}}' temp_s_t.tsv | sed 's/\t/\n/g' | sort -t $'\t' -k 1 -n -r | paste -d $'\t' -s >> temp_re_st.tsv; \
+done; \
+cat <(echo source$'\t'target$'\t'similarity) <(sort temp_re_st.tsv | uniq) > source_target_$limit.tsv;
+rm temp*
+#######################################
+#######################################
+#######ftalign_parameter
+tlimit='0.4'
+a=$(awk 'END{print NF}' ftalign.tsv); \
+awk -F $'\t' -v OFS=$'\t' '{print $1}' ftalign.tsv | awk -F _ -v OFS=$'\t' '{print $NF}' > temp_id; \
+paste temp_id <(cut -d $'\t' -f 2- ftalign.tsv) | sed '1d' > temp_fta; \
+for (( i=2; i <= a; i++))
+do
+n=$((i-1))
+norm_p=$(awk '{if(NR=='$n'){print $'$i'}}' temp_fta)
+target=$( awk -F $'\t' -v OFS=$'\t' '{if(NR=='$i'){print}}' temp_id )
+awk -F $'\t' -v OFS=$'\t' '{norm=$'$i';{norm/='$norm_p'};print $1,"'$target'",norm}' temp_fta | awk -F $'\t' -v OFS=$'\t' ' $3>='$tlimit' && $3<=0.999 {print}' >> temp_s_t_f_$tlimit.tsv;
+done; \
+########filter the repetition
+a=$(awk 'END{print NR}' temp_s_t_f_$tlimit.tsv); \
+for (( i=1; i <= a; i++ ))
+do
+awk -F $'\t' -v OFS=$'\t' '{if(NR=='$i'){print}}' temp_s_t_f_$tlimit.tsv | sed 's/\t/\n/g' | sort -t $'\t' -k 1 -n -r | paste -d $'\t' -s >> temp_re_f_t.tsv; \
+done; \
+cat <(echo source$'\t'target$'\t'similarity) <(sort temp_re_f_t.tsv | uniq) > source_target_tree_$tlimit.tsv;

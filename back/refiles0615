@@ -1,0 +1,158 @@
+##########################
+##########################
+#path=
+mkdir results
+mkdir temp
+mkdir temp/fintemp
+ls -l | awk '/^d/ {print $NF}' > temp/namelist; \
+for filename in $(cat temp/namelist)
+do
+id=$(echo $filename | awk -F _ '{print $NF}');
+cat $filename/fingerid/*.tsv | sort -t $'\t' -n -k 5 -r | uniq | sed 's/\r//g' | awk -F $'\t' -v OFS=$'\t' '{if(NR==1){print $0,"id","filename"};if(NR>=2){print $0,"'$id'","'$filename'"}}' > temp/fintemp/sum$id
+sed -n '1p;2p' temp/fintemp/sum$id > temp/fintemp/first$id
+done;
+cat temp/fintemp/first* | sort -t $'\t' -n -k 5 -r | uniq > results/finfirst_set.tsv
+###################################
+###################################
+mkdir temp/canotemp;
+awk -F $'\t' -v OFS=$'\t' '{if(NR>=2){print $3,$14}}' results/finfirst_set.tsv > temp/Mo_filename;
+awk -F $'\t' '{if(NR>=2){print $1}}' canopus.tsv > temp/canotemp/pos_canoindex;
+pos_cano_title=$(awk -F $'\t' '{if(NR>=2){print $}}' canopus.tsv | paste -s)
+awk -F $'\t' '{if(NR>=2){print $1}}' canopus_neg.tsv > temp/canotemp/neg_canoindex;
+neg_cano_title=$(awk -F $'\t' '{if(NR>=2){print $}}' canopus_neg.tsv | paste -s)
+list="temp/Mo_filename";
+IFS_def=$IFS; \
+IFS=$'\n'; \
+rm temp/canotemp/allpos
+rm temp/canotemp/allneg
+for sumname in $(cat $list)
+do
+moname=$(echo $sumname | awk -F $'\t' '{print $1}'); \
+filename=$(echo $sumname | awk -F $'\t' '{print $2}'); \
+id=$(echo $filename | awk -F _ '{print $NF}');
+  if [ $id -gt 0 ]
+  then paste -s temp/canotemp/pos_canoindex $filename/canopus/$moname*.fpt | sed 's/\r//g' | awk -F $'\t' -v OFS=$'\t' '{if(NR==1){print $0,"id"};if(NR>=2){print $0,"'$id'"}}' >> temp/canotemp/allpos
+  else paste -s temp/canotemp/neg_canoindex $filename/canopus/$moname*.fpt | sed 's/\r//g' | awk -F $'\t' -v OFS=$'\t' '{if(NR==1){print $0,"id"};if(NR>=2){print $0,"'$id'"}}' >> temp/canotemp/allneg
+  fi
+done; \
+IFS=$IFS_def; \
+cat <(echo $pos_cano_title) <(sort temp/canotemp/allpos | uniq | sed '1d') > results/pos_all_cano_pp.tsv;
+cat <(echo $neg_cano_title) <(sort temp/canotemp/allneg | uniq | sed '1d') > results/neg_all_cano_pp.tsv;
+rm temp/canotemp/trans*
+a=$(awk -F $'\t' -v OFS=$'\t' '{print NF}' results/pos_all_cano_pp.tsv)
+for ((i=1;i<=a;i++))
+do
+awk -F $'\t' -v OFS=$'\t' '{print $'$i'}' results/pos_all_cano_pp.tsv | paste -s >> temp/canotemp/trans_pos_all_cano_pp.tsv
+done;
+a=$(awk -F $'\t' -v OFS=$'\t' '{print NF}' results/neg_all_cano_pp.tsv)
+for ((i=1;i<=a;i++))
+do
+awk -F $'\t' -v OFS=$'\t' '{print $'$i'}' results/neg_all_cano_pp.tsv | paste -s >> temp/canotemp/trans_neg_all_cano_pp.tsv
+done;
+join -a1 -a2 -t $'\t' <(sort temp/canotemp/trans_pos_all_cano_pp.tsv) <(sort temp/canotemp/trans_neg_all_cano_pp.tsv) > temp/canotemp/trans_all_cano_pp.tsv
+a=$(awk -F $'\t' -v OFS=$'\t' '{print NF}' temp/canotemp/trans_all_cano_pp.tsv)
+rm results/all_cano_pp.tsv
+for ((i=1;i<=a;i++))
+do
+awk -F $'\t' -v OFS=$'\t' '{print $'$i'}' temp/canotemp/trans_all_cano_pp.tsv | paste -s >> results/all_cano_pp.tsv
+done;
+####################################
+####################################
+awk -F $'\t' -v OFS=$'\t' '{if(NR>=2){print $4}}' | sort -k 1 | uniq > results/spe_class.tsv
+awk -F $'\t' -v OFS=$'\t' '{if(NR>=2){print $}}' | sort -k 1 | uniq > results/super_class.tsv
+#########################
+index="results/super_class.tsv"
+awk '{if(NR==1){print}}' results/all_cano_pp.tsv | sed 's/\t/\n/g' > temp/canotemp/searchindex;
+#########################
+IFS_def=$IFS; \
+IFS=$'\n'; \
+rm temp/canotemp/line_n
+for line_n in $(cat $index)
+do
+grep -F -i -n "$line_n" temp/canotemp/pos_searchindex >> temp/canotemp/line_n
+done; \
+IFS=$IFS_def;
+awknum=$(awk -F : -v OFS=$'\t' '{print $1}' temp/canotemp/line_n | sort -n)
+for numline in $(echo $awknum)
+awk -F $'\t' -v OFS=$'\t' '{print $'$numline'}' results/all_cano_pp.tsv > temp/canotemp/awk$numline
+done;
+paste temp/canotemp/awk* <(awk -F $'\t' '{print $NF}' results/all_cano_pp.tsv) > results/select_cano_pp.tsv
+###################################
+###################################
+tlimit='0.5'; \
+mkdir temp/ftaligntemp
+a=$(awk 'END{print NF}' ftalign.tsv); \
+awk -F $'\t' -v OFS=$'\t' '{print $1}' ftalign.tsv | awk -F _ -v OFS=$'\t' '{print $NF}' > temp/ftaligntemp/id; \
+paste temp/ftaligntemp/id <(cut -d $'\t' -f 2- ftalign.tsv) | sed '1d' > temp/ftaligntemp/fta; \
+rm temp/ftaligntemp/net_$tlimit
+for (( i=2; i <= a; i++))
+do
+n=$((i-1))
+p1=$(awk '{if(NR=='$n'){print $'$i'}}' temp/ftaligntemp/fta)
+target=$(awk -F $'\t' -v OFS=$'\t' '{if(NR=='$i'){print}}' temp/ftaligntemp/id)
+awk -F $'\t' -v OFS=$'\t' '{for(x=2; x<=NF ;x++){y=x-1;p2=$x;norm_o=$'$i';norm1=norm_o/'$p1';norm2=norm_o/p2;norms=(norm1+norm2)/2;if(NR==y){print $1,"'$target'",norms}}}' temp/ftaligntemp/fta | awk -F $'\t' -v OFS=$'\t' '$1>=0 && $2>=0 || $1<=0 && $2<=0 {print}' | awk -F $'\t' -v OFS=$'\t' ' $3>='$tlimit' && $3<=0.999 {print}' >> temp/ftaligntemp/net_$tlimit;
+done; \
+a=$(awk 'END{print NR}' temp/ftaligntemp/net_$tlimit);
+rm temp/ftaligntemp/re_net_$tlimit
+for (( i=1; i <= a; i++ ))
+do
+awk -F $'\t' -v OFS=$'\t' '{if(NR=='$i'){if($1>$2){print $1,$2,$3}else{print $2,$1,$3}}}' temp/ftaligntemp/net_$tlimit >> temp/ftaligntemp/re_net_$tlimit
+done; \
+sort temp/ftaligntemp/re_net_$tlimit | uniq > temp/ftaligntemp/filter_net_$tlimit;
+#################################
+a=$(awk 'END{print NR}' temp/ftaligntemp/filter_net_$tlimit)
+rm temp/ftaligntemp/refilter_net_$tlimit
+for (( i=1; i <= a; i++))
+do
+source=$(awk '{if(NR=='$i'){print $1}}' temp/ftaligntemp/filter_net_$tlimit)
+sourceion=$(cat _$source/compound.info | grep ionMass | awk '{print $2}')
+target=$(awk '{if(NR=='$i'){print $2}}')
+targetion=$(cat _$target/compound.info | grep ionMass | awk '{print $2}')
+deltaion=$(($sourceion-$targetion))
+awk -F $'\t' -v OFS=$'\t' '{print $0,"'$deltaion'"}' temp/ftaligntemp/filter_net_$tlimit >> temp/ftaligntemp/refilter_net_$tlimit
+done;
+####
+####
+####
+cat <(echo source$'\t'target$'\t'tfalign$'\t'similarity$'\t'delta_mass) temp/ftaligntemp/refilter_net_$tlimit > results/source_target_tree_$tlimit.tsv;
+##################################
+##################################
+flimit='0.98'; \
+dtime='0.1'
+mkdir temp/tanitemp
+a=$(awk 'END{print NF}' tanimoto.tsv)
+awk -F $'\t' -v OFS=$'\t' '{print $1}' tanimoto.tsv | awk -F _ -v OFS=$'\t' '{print $NF}' > temp/tanitemp/id; \
+paste temp_id <(cut -d $'\t' -f 2- tanimoto.tsv) | sed '1d' > temp/tanitemp/tani; \
+rm temp/tanitemp/net_$flimit
+for (( i=2; i <= a; i++ ))
+do
+target=$( awk -F $'\t' -v OFS=$'\t' '{if(NR=='$i'){print}}' temp/tanitemp/id ); \
+awk -F $'\t' -v OFS=$'\t' '{print $1,"'$target'",$'$i'}' temp/tanitemp/tani | awk -F $'\t' -v OFS=$'\t' '$1>=0 && $2<=0 || $1<=0 && $2>=0 {print}'| awk -F $'\t' -v OFS=$'\t' '$3>='$flimit' && $3<=0.9999 {print}' >> temp/tanitemp/net_$flimit;
+done;
+########filter the repetition
+a=$(awk 'END{print NR}' temp/tanitemp/net_$flimit); \
+rm temp/tanitemp/re_net_$flimit
+for (( i=1; i <= a; i++ ))
+do
+awk -F $'\t' -v OFS=$'\t' '{if(NR=='$i'){if($1>$2){print $1,$2,"null",$3}else{print $2,$1,"null",$3}}}' temp/tanitemp/net_$flimit >> temp/tanitemp/re_net_$flimit; \
+done; \
+sort temp/tanitemp/re_net_$flimit | uniq > temp/tanitemp/filter_net_$flimit;
+#################################
+a=$(awk 'END{print NR}' temp/tanitemp/filter_net_$flimit)
+rm temp/tanitemp/refilter_net_$flimit
+for (( i=1; i <= a; i++ ))
+do
+source=$(awk '{if(NR=='$i'){print $1}}' temp/tanitemp/filter_net_$flimit)
+sourcert=$(cat _$source/compound.info | grep rt | awk '{print $2}' | awk -F : '{min=$1/60;{print min}}')
+target=$(awk '{if(NR=='$i'){print $2}}')
+targetrt=$(cat _$target/compound.info | grep rt | awk '{print $2}' | awk -F : '{min=$1/60;{print min}}')
+deltart=$(($sourcert-$targetrt))
+sourceion=$(cat _$source/compound.info | grep ionMass | awk '{print $2}')
+targetion=$(cat _$target/compound.info | grep ionMass | awk '{print $2}')
+deltaion=$(($sourceion-$targetion))
+awk -F $'\t' -v OFS=$'\t' '{if(NR=='$i'){if('$deltart'>=0 && '$deltart'<=0.1 || '$deltart'<=0 && '$deltart'>=-0.1){print $0,"'$deltaion'"}}}' temp/tanitemp/filter_net_$flimit >> temp/tanitemp/refilter_net_$flimit;
+done;
+cat <(echo source$'\t'target$'\t'tfalign$'\t'similarity$'\t'delta_mass) temp/tanitemp/refilter_net_$flimit.tsv > results/source_target_simi_$flimit.tsv;
+#################################
+#################################
+

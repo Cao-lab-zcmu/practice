@@ -1,0 +1,243 @@
+awk -F $'\t' '
+ 	{
+ 	if(NR==FNR)
+ 	 	{
+ 	 	if(NR==1)
+ 	 	 	{
+ 	 	 	p_file=FILENAME
+ 	 	 	\
+ 	 	 	for(i=1; i<=NF; i++)
+ 	 	 	 	{
+ 	 	 	 	if($i~/^id/)
+ 	 	 	 	 	{
+ 	 	 	 	 	col_id=i
+ 	 	 	 	 	}
+ 	 	 	 	if($i~/m\/z/)
+ 	 	 	 	 	{
+ 	 	 	 	 	col_mz=i
+ 	 	 	 	 	}
+ 	 	 	 	}
+ 	 	 	}
+ 	 	if(NR>=2)
+ 	 	 	{
+ 	 	 	pre_mz[$col_id]=$col_mz
+ 	 	 	\
+ 	 	 	printf "info: datafile1 is ready. The data is " $col_id " to " $col_mz "\n"  #info
+ 	 	 	}
+ 	 	}
+ 	if(FILENAME~/ms2_figures/)
+ 	 	{
+ 	 	if(FNR==1)
+ 	 	 	{
+ 	 	 	close(p_file)
+ 	 	 	\
+ 	 	 	p_file=FILENAME
+ 	 	 	\
+ 	 	 	n=split(FILENAME,a,"[/]")
+ 	 	 	\
+ 	 	 	split(a[n],b,"[.]")
+ 	 	 	\
+ 	 	 	id=b[1]
+ 	 	 	\
+ 	 	 	printf "info: datafile2 is ready. The id number is " id "\n"  #info
+ 	 	 	}
+ 	 	if(FNR>=2)
+ 	 	 	{
+ 	 	 	if("'$data_origin'"=="sirius")
+ 	 	 	 	{
+ 	 	 	 	if($2<0)
+ 	 	 	 	 	{
+ 	 	 	 	 	count[id]+=1
+ 	 	 	 	 	\
+ 	 	 	 	 	data2_mz[id,count[id]]=$1
+ 	 	 	 	 	\
+ 	 	 	 	 	data2_in[id,count[id]]=$2*(-1)
+ 	 	 	 	 	\
+ 	 	 	 	 	printf "info: The ms2 peak is " count[id] " " $1 " " data2_in[id,count[id]] "\n"  #info
+ 	 	 	 	 	}
+ 	 	 	 	}
+ 	 	 	else
+ 	 	 	 	{
+ 	 	 	 	if($2>0)
+ 	 	 	 	 	{
+ 	 	 	 	 	count[id]+=1
+ 	 	 	 	 	\
+ 	 	 	 	 	data2_mz[id,count[id]]=$1
+ 	 	 	 	 	\
+ 	 	 	 	 	data2_in[id,count[id]]=$2
+ 	 	 	 	 	\
+ 	 	 	 	 	printf "info: The ms2 peak is " count[id] " " $1 " " data2_in[id,count[id]] "\n"  #info
+ 	 	 	 	 	}
+ 	 	 	 	}
+ 	 	 	}
+ 	 	}
+ 	if(FILENAME~/.msp/)
+ 	 	{
+ 	 	if(FNR==1)
+ 	 	 	{
+ 	 	 	msp_num+=1
+ 	 	 	\
+ 	 	 	FS="[:][ ]||[\t]"
+ 	 	 	\
+ 	 	 	close(p_file)
+ 	 	 	\
+ 	 	 	p_file=FILENAME
+ 	 	 	\
+ 	 	 	n=split($0,c,"[:][ ]")
+ 	 	 	\
+ 	 	 	name=c[n]
+ 	 	 	\
+ 	 	 	printf "info: datafile3 is ready. The first name is " name "\n"  #info
+ 	 	 	}
+ 	 	if(FNR>=2)
+ 	 	 	{
+ 	 	 	if($1~/NAME/)
+ 	 	 	 	{
+ 	 	 	 	if(belong_id[msp_num]>=1)
+ 	 	 	 	 	{
+ 	 	 	 	 	for(i=1; i<=database_count[msp_num]; i++)
+ 	 	 	 	 	 	{
+ 	 	 	 	 	 	mz=data3_mz[msp_num,i]
+ 	 	 	 	 	 	\
+ 	 	 	 	 	 	intensity=(data3_in[msp_num,i]/max_in[msp_num])*100
+ 	 	 	 	 	 	\
+ 	 	 	 	 	 	if(intensity>=5)
+ 	 	 	 	 	 	 	{
+ 	 	 	 	 	 	 	point='$weight1'
+ 	 	 	 	 	 	 	}
+ 	 	 	 	 	 	else
+ 	 	 	 	 	 	 	{
+ 	 	 	 	 	 	 	point='$weight2'
+ 	 	 	 	 	 	 	}
+ 	 	 	 	 	 	for(j=1; j<=belong_id[msp_num]; j++)
+ 	 	 	 	 	 	 	{
+ 	 	 	 	 	 	 	for(k=1; k<=count[subdirectory[msp_num,j]]; k++)
+ 	 	 	 	 	 	 	 	{
+ 	 	 	 	 	 	 	 	l1=data2_mz[subdirectory[msp_num,j],k]-'$ms2_tolerance'
+ 	 	 	 	 	 	 	 	\
+ 	 	 	 	 	 	 	 	m1=data2_mz[subdirectory[msp_num,j],k]+'$ms2_tolerance'
+ 	 	 	 	 	 	 	 	\
+ 	 	 	 	 	 	 	 	if(mz>=l1 && mz<=m1)
+ 	 	 	 	 	 	 	 	 	{
+ 	 	 	 	 	 	 	 	 	l2=data2_in[subdirectory[msp_num,j],k]-'$in_tolerance'
+ 	 	 	 	 	 	 	 	 	\
+ 	 	 	 	 	 	 	 	 	m2=data2_in[subdirectory[msp_num,j],k]+'$in_tolerance'
+ 	 	 	 	 	 	 	 	 	\
+ 	 	 	 	 	 	 	 	 	if(intensity>=l2 && intensity<=m2)
+ 	 	 	 	 	 	 	 	 	 	{
+ 	 	 	 	 	 	 	 	 	 	assign_point[subdirectory[msp_num,j],msp_num]+=point
+ 	 	 	 	 	 	 	 	 	 	}
+ 	 	 	 	 	 	 	 	 	}
+ 	 	 	 	 	 	 	 	}
+ 	 	 	 	 	 	 	}
+ 	 	 	 	 	 	}
+ 	 	 	 	 	}
+ 	 	 	 	msp_num+=1
+ 	 	 	 	\
+ 	 	 	 	name=$2
+ 	 	 	 	}
+ 	 	 	if($1~/PRECURSORMZ/)
+ 	 	 	 	{
+ 	 	 	 	for(i in pre_mz)
+ 	 	 	 	 	{
+ 	 	 	 	 	if($2>=pre_mz[i]-'$tolerance' && $2<=pre_mz[i]+'$tolerance')
+ 	 	 	 	 	 	{
+ 	 	 	 	 	 	printf "info: the MS1 are " $2 " vs " pre_mz[i] "\n"
+ 	 	 	 	 	 	
+ 	 	 	 	 	 	data3_mz[msp_num]=$2
+ 	 	 	 	 	 	
+ 	 	 	 	 	 	belong_id[msp_num]+=1
+ 	 	 	 	 	 	
+ 	 	 	 	 	 	subdirectory[msp_num,belong_id[msp_num]]=i
+ 	 	 	 	 	 	
+ 	 	 	 	 	 	assign[i,msp_num]=name
+ 	 	 	 	 	 	
+ 	 	 	 	 	 	sep[i,msp_num]=msp_num
+ 	 	 	 	 	 	}
+ 	 	 	 	 	}
+ 	 	 	 	}
+ 	 	 	if(belong_id[msp_num]>=1)
+ 	 	 	 	{
+ 	 	 	 	if($1~/PRECURSORTYPE/)
+ 	 	 	 	 	{
+ 	 	 	 	 	data3_type[msp_num]=$2; getline;
+ 	 	 	 	 	\
+ 	 	 	 	 	data3_formula[msp_num]=$2; getline;
+ 	 	 	 	 	\
+ 	 	 	 	 	data3_ontology[msp_num]=$2; getline;
+ 	 	 	 	 	\
+ 	 	 	 	 	data3_inchikey[msp_num]=$2; getline;
+ 	 	 	 	 	\
+ 	 	 	 	 	data3_smiles[msp_num]=$2; getline;
+ 	 	 	 	 	\
+ 	 	 	 	 	data3_rt[msp_num]=$2; getline;
+ 	 	 	 	 	\
+ 	 	 	 	 	data3_ccs[msp_num]=$2;
+ 	 	 	 	 	}
+ 	 	 	 	if($1~/Num Peaks/)
+ 	 	 	 	 	{
+ 	 	 	 	 	data3_peaks[msp_num]=$2
+ 	 	 	 	 	}
+ 	 	 	 	if($1~/^[0-9]/)
+ 	 	 	 	 	{
+ 	 	 	 	 	database_count[msp_num]+=1
+ 	 	 	 	 	\
+ 	 	 	 	 	data3_mz[msp_num,database_count[msp_num]]=$1
+ 	 	 	 	 	\
+ 	 	 	 	 	data3_in[msp_num,database_count[msp_num]]=$2
+ 	 	 	 	 	\
+ 	 	 	 	 	if(max_in[msp_num]<$2)
+ 	 	 	 	 	 	{
+ 	 	 	 	 	 	max_in[msp_num]=$2
+ 	 	 	 	 	 	}
+ 	 	 	 	 	}
+ 	 	 	 	}
+ 	 	 	}
+ 	 	}
+ 	if(msp_num!="" && (FILENAME~"'$data1'"))
+ 	 	{
+ 	 	if(FNR==1)
+ 	 	 	{
+ 	 	 	FS="\t"
+ 	 	 	\
+ 	 	 	close(p_file)
+ 	 	 	\
+ 	 	 	printf $0"\t" "custom_idenfication\n" > "../identi_2_'$data_origin'.tsv"
+ 	 	 	}
+ 	 	if(FNR>=2)
+ 	 	 	{
+ 	 	 	printf $0 >> "../identi_2_'$data_origin'.tsv"
+ 	 	 	\
+ 	 	 	for(i in assign_point)
+ 	 	 	 	{
+ 	 	 	 	if(i~"^"$1"\034" && assign_point[i]>='$point_limit')
+ 	 	 	 	 	{
+ 	 	 	 	 	score[i]=assign_point[i]
+ 	 	 	 	 	}
+ 	 	 	 	}
+ 	 	 	for(n=asort(score,sort_score); n>=1; n--)
+ 	 	 	 	{
+ 	 	 	 	for(i in score)
+ 	 	 	 	 	{
+ 	 	 	 	 	if(score[i]==sort_score[n])
+ 	 	 	 	 	 	{
+ 	 	 	 	 	 	printf "\t" score[i] " | " data3_type[sep[i]] " | "  \
+ 	 	 	 	 	 	\
+ 	 	 	 	 	 	data3_formula[sep[i]] " | " \
+ 	 	 	 	 	 	\
+ 	 	 	 	 	 	data3_ontology[sep[i]] " | " \
+ 	 	 	 	 	 	\
+ 	 	 	 	 	 	assign[i] " | " \
+ 	 	 	 	 	 	\
+ 	 	 	 	 	 	>> "../identi_2_'$data_origin'.tsv"
+ 	 	 	 	 	 	\
+ 	 	 	 	 	 	delete score[i]; break;
+ 	 	 	 	 	 	}
+ 	 	 	 	 	}
+ 	 	 	 	}
+ 	 	 	delete score
+ 	 	 	\
+ 	 	 	printf "\n" >> "../identi_2_'$data_origin'.tsv"
+ 	 	 	}
+ 	 	}
+ 	}' $data1 $data2 $data3 $data1

@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+VSPBWOAEHQDXRD	InChI=1S/C9H7NO/c11-6-7-1-2-8-3-4-10-9(8)5-7/h1-6,10H	C9H7NO	1	-46.306803709159034	6-Formylindole	C1=CC(=CC2=C1C=CN2)C=O	1.60542846	17997857,25458499	PubChem:(2773435); additional:(null); PubChem class - safety and toxic:(null); Training Set:(null); PubMed:(null)	0.6509532964637187	67649602	957	927_PL20210630_957

@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+UKVGBSKDDYDKEF	InChI=1S/C7H7N2O2/c8-5-2-1-4(7(10)11)3-6(5)9/h1-3,9H,8H2,(H,10,11)	C7H7N2O2	1	-99.43490596633724	null	C1=CC(=C(C=C1C(=O)O)[NH])N	0.0854501724		PubChem:(102132076)	0.3331947052521708	2	1536	1479_PL20210630_1536

@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+OVHRACAWYNBLAV	InChI=1S/C10H18N2O5S/c1-7(13)12-9(10(14)15)6-11-5-8-3-2-4-18(8,16)17/h8-9,11H,2-6H2,1H3,(H,12,13)(H,14,15)	C10H18N2O5S	1	-156.67221514110201	null	CC(=O)NC(CNCC1CCCS1(=O)=O)C(=O)O	-3.0999999		PubChem:(81040554)	0.3333332875494669	2	1478	1422_PL20210630_1478

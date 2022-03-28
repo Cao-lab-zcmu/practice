@@ -1,0 +1,178 @@
+ 
+  -OEChem-10192104412D
+
+ 36 35  0     1  0  0  0  0  0999 V2000
+    9.7942   -0.3170    0.0000 S   0  0  0  0  0  0  0  0  0  0  0  0
+    8.0622   -0.3170    0.0000 P   0  0  3  0  0  0  0  0  0  0  0  0
+    7.1962   -0.8170    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    8.9282    0.1830    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    7.5622    0.5490    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    8.5622   -1.1830    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5981   -0.3170    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320   -0.8170    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    5.4641   -0.8170    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660   -0.3170    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    6.3301   -0.3170    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0000   -0.8170    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+   10.6603    0.1830    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+   11.5263   -0.3170    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+   10.6603    1.1830    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    4.9966    0.1580    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.1996    0.1580    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.3335   -1.2919    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.1306   -1.2919    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.0656   -1.2919    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.8626   -1.2919    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.2646    0.1580    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.4675    0.1580    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.7287    0.1580    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.9316    0.1580    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.6900   -0.2801    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.4631   -1.1270    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.3100   -1.3539    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+   11.1972    0.4930    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+   11.2163   -0.8539    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+   12.0632   -0.6270    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+   11.8363    0.2199    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+   11.2803    1.1830    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+   10.6603    1.8030    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+   10.0403    1.1830    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    7.8722    1.0860    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+  1  4  1  0  0  0  0
+  1 13  1  0  0  0  0
+  2  3  1  0  0  0  0
+  2  4  1  0  0  0  0
+  2  5  1  0  0  0  0
+  2  6  2  0  0  0  0
+  3 11  1  0  0  0  0
+  5 36  1  0  0  0  0
+  7  8  1  0  0  0  0
+  7  9  1  0  0  0  0
+  7 16  1  0  0  0  0
+  7 17  1  0  0  0  0
+  8 10  1  0  0  0  0
+  8 18  1  0  0  0  0
+  8 19  1  0  0  0  0
+  9 11  1  0  0  0  0
+  9 20  1  0  0  0  0
+  9 21  1  0  0  0  0
+ 10 12  1  0  0  0  0
+ 10 22  1  0  0  0  0
+ 10 23  1  0  0  0  0
+ 11 24  1  0  0  0  0
+ 11 25  1  0  0  0  0
+ 12 26  1  0  0  0  0
+ 12 27  1  0  0  0  0
+ 12 28  1  0  0  0  0
+ 13 14  1  0  0  0  0
+ 13 15  1  0  0  0  0
+ 13 29  1  0  0  0  0
+ 14 30  1  0  0  0  0
+ 14 31  1  0  0  0  0
+ 14 32  1  0  0  0  0
+ 15 33  1  0  0  0  0
+ 15 34  1  0  0  0  0
+ 15 35  1  0  0  0  0
+M  END
+> <PUBCHEM_COMPOUND_CID>
+21507802
+
+> <PUBCHEM_COMPOUND_CANONICALIZED>
+1
+
+> <PUBCHEM_CACTVS_COMPLEXITY>
+199
+
+> <PUBCHEM_CACTVS_HBOND_ACCEPTOR>
+5
+
+> <PUBCHEM_CACTVS_HBOND_DONOR>
+1
+
+> <PUBCHEM_CACTVS_ROTATABLE_BOND>
+9
+
+> <PUBCHEM_CACTVS_SUBSKEYS>
+AAADceBwOAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGgQACCAACACkwAKCAAAAARIAQAAAAIAAAAAAAAAAAAAAAAAAAAIAAAAAAAAEAAAAAAGAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+
+> <PUBCHEM_IUPAC_OPENEYE_NAME>
+hexyl isopropylsulfanyl hydrogen phosphate
+
+> <PUBCHEM_IUPAC_CAS_NAME>
+2-propanesulfenic acid
+
+> <PUBCHEM_IUPAC_NAME_MARKUP>
+hexyl propan-2-ylsulfanyl hydrogen phosphate
+
+> <PUBCHEM_IUPAC_NAME>
+hexyl propan-2-ylsulfanyl hydrogen phosphate
+
+> <PUBCHEM_IUPAC_SYSTEMATIC_NAME>
+hexyl propan-2-ylsulfanyl hydrogen phosphate
+
+> <PUBCHEM_IUPAC_TRADITIONAL_NAME>
+hexyl (isopropylthio) hydrogen phosphate
+
+> <PUBCHEM_IUPAC_INCHI>
+InChI=1S/C9H21O4PS/c1-4-5-6-7-8-12-14(10,11)13-15-9(2)3/h9H,4-8H2,1-3H3,(H,10,11)
+
+> <PUBCHEM_IUPAC_INCHIKEY>
+QBVXXGQFODFWNG-UHFFFAOYSA-N
+
+> <PUBCHEM_XLOGP3_AA>
+2.6
+
+> <PUBCHEM_EXACT_MASS>
+256.08981732
+
+> <PUBCHEM_MOLECULAR_FORMULA>
+C9H21O4PS
+
+> <PUBCHEM_MOLECULAR_WEIGHT>
+256.30
+
+> <PUBCHEM_OPENEYE_CAN_SMILES>
+CCCCCCOP(=O)(O)OSC(C)C
+
+> <PUBCHEM_OPENEYE_ISO_SMILES>
+CCCCCCOP(=O)(O)OSC(C)C
+
+> <PUBCHEM_CACTVS_TPSA>
+81.1
+
+> <PUBCHEM_MONOISOTOPIC_WEIGHT>
+256.08981732
+
+> <PUBCHEM_TOTAL_CHARGE>
+0
+
+> <PUBCHEM_HEAVY_ATOM_COUNT>
+15
+
+> <PUBCHEM_ATOM_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ATOM_UDEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_BOND_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_BOND_UDEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ISOTOPIC_ATOM_COUNT>
+0
+
+> <PUBCHEM_COMPONENT_COUNT>
+1
+
+> <PUBCHEM_CACTVS_TAUTO_COUNT>
+-1
+
+> <PUBCHEM_COORDINATE_TYPE>
+1
+5
+255
+
+$$$$

@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+ROCVGJLXIARCAC	InChI=1S/C6H7NO2/c7-5-2-1-4(8)3-6(5)9/h1-3,8-9H,7H2	C6H7NO2	1	-83.14389824446042	4-Aminoresorcinol	C1=CC(=C(C=C1O)O)N	0.383583546	12444975,15496726,16862786,18039578,21168968	PubChem:(432827, 44631759); Biocyc:(CPD-14135); ZINC bio:(ZINC00388397); NORMAN:(NS00024120); PubChem class - bio and metabolites:(null); PubMed:(null); KEGG Mine:(null)	0.36226709722656475	8606984258	1440	1390_PL20210630_1440

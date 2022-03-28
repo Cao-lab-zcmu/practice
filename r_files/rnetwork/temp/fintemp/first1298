@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+YAMMUQMONCMYCX	InChI=1S/C10H9N/c1-2-8-7-11-10-6-4-3-5-9(8)10/h2-7,11H,1H2	C10H9N	1	-43.99091054709607	1H-Indole, 3-ethenyl-	C=CC1=CNC2=CC=CC=C21	2.49475312	16096671	PubChem:(14532445); PubMed:(null); KEGG Mine:(null)	0.7030519961391387	8589934658	1298	1265_PL20210630_1298

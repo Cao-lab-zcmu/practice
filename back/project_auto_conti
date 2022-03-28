@@ -1,0 +1,16 @@
+filter_pa='0.95'; \
+fin_file=csi_fingerid_neg.tsv; \
+paste <(awk -F $'\t' -v OFS=_ '{print "'Frag'",$2}' $fin_file) <(awk -F $'\t' '{print $3}' $fin_file) | sed '1d' > temp_index_des; \
+sumlist=Mo_Fo.tsv; \
+IFS_def=$IFS; \
+IFS=$'\n'; \
+for sumname in $(cat $sumlist)
+do
+molename=$(echo $sumname | awk -F $'\t' '{print $1}'); \
+idname=$(echo $sumname | awk -F $'\t' '{print $2}'); \
+sharedname=$(echo $idname | awk -F _ '{print $NF}'); \
+paste temp_index_des $idname/fingerprints/$molename*.fpt | awk -F $'\t' -v OFS=$'\t' '$3>='$filter_pa' {print "'$sharedname'",$0}' >> temp_frag_sum.tsv; \
+done; \
+IFS=$IFS_def; \
+prefile=/media/wizard/Seagate/all_group/source_target_tree_0.4.tsv
+cat source_target_tree_0.4.tsv temp_frag_sum.tsv > frag_sum.tsv;

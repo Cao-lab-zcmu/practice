@@ -1,0 +1,62 @@
+library(ggplot2)
+library(ggrepel)
+
+setwd("volcano")
+
+files=list.files(path = ".", pattern = "*.tsv$", all.files = FALSE,
+           full.names = FALSE, recursive = FALSE,
+           ignore.case = FALSE, include.dirs = FALSE)
+           
+for(file in files){
+
+data <- read.csv(file=file,header=T,sep="\t",check.names=F)
+
+#data <- na.omit(data)
+
+savename=strsplit(file, split=".tsv")
+
+set=colnames(data)
+
+title=set[3]
+
+colnames(data)=c("id","p.value","fold")
+
+data$change <- factor(ifelse(data$p.value < 0.05 & abs(data$fold) >= 1,
+                      ifelse(data$fold >= 1,"up","down"),"stable"),
+                      levels = c("up","down","stable"))
+
+p <- ggplot(data,aes(x=fold, y=-log10(p.value),color = change)) + 
+
+  geom_point(alpha=0.8, stroke=0, size=3) + 
+  
+  scale_color_manual(values = c("down"="#4DBBD5FF","stable"="#8491B4FF","up"="#DC0000FF")) +
+  
+  #xlim(-10,10) + 
+  
+  ylim(1,max(-log10(data$p.value))) +
+   
+  geom_hline(yintercept = -log10(0.05),linetype=4,size=0.8) +
+  
+  geom_vline(xintercept = c(-1,1),linetype=4,size=0.8) + 
+  
+  labs(x = "log2(foldchange)",y="-log10(p-value)",title=title) + 
+  
+  geom_text_repel(data = data[data$p.value<0.01 & abs(data$fold) >= 2,],
+                  aes(label = id),size = 3,family="Times") +
+                  
+  #annotate("text", x = -10, y = max(-log10(data$p.value))*0.8, label = paste0("Based on ",nrow(data)," features"),
+  #          color="black",size = 3, fontface="bold", family="Times", hjust = 0 ) +
+  
+  theme(text=element_text(family="serif"),
+    
+    #axis.line = element_line(colour = "black", size=0.2),
+
+    #plot.margin = unit(c(3, 1, 3, 1), "cm")
+    
+    plot.title = element_text(hjust = 0.5))
+    
+ #svg(paste0(savename,".svg"),width=8,height=6.5)
+ #p
+ #dev.off()
+ 
+ ggsave(p,file=paste0(savename,".svg"),width=8,height=6.5)}

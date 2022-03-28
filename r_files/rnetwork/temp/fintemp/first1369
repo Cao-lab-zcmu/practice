@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+HSTLERSELRQOAX	InChI=1S/C10H10O3/c1-7-3-2-4-9(11)8(7)5-6-10(12)13/h2-6,11H,1H3,(H,12,13)	C10H10O3	1	-80.59027675783643	(E)-3-(2-hydroxy-6-methylphenyl)prop-2-enoic acid	CC1=C(C(=CC=C1)O)C=CC(=O)O	1.89999998		PubChem:(21490380, 53894471); EcoCyc Mine:(null); KEGG Mine:(null)	0.4243902705170401	25769803778	1369	1330_PL20210630_1369

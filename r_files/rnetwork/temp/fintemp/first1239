@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+RCTCYOQIGNPQJH	InChI=1S/C7H14N2O3S/c1-5(6(2)13(4)11)9-12-7(10)8-3/h6H,1-4H3,(H,8,10)	C7H14N2O3S	1	-50.809147633995146	Butocarboximsulfoxide	CC(C(=NOC(=O)NC)C)S(=O)C	-0.200000003		PubChem:(119464, 5486553, 9576739, 92287077, 92287794, 92843730, 92843731, 125183385, 125183386, 125183387, 125183388); NORMAN:(NS00008020); additional:(null); PubChem class - safety and toxic:(null); Training Set:(null)	0.5535807981387285	67911682	1239	1206_PL20210630_1239

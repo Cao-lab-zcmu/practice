@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+PHZREHARUPHHCU	InChI=1S/C7H8O3/c1-4-2-3-5(8)7(10)6(4)9/h2-3,8-10H,1H3	C7H8O3	1	-74.28425035643305	Benzenetriol, methyl-	CC1=C(C(=C(C=C1)O)O)O	1.20000005	17137372,22707832	PubChem:(156015); EcoCyc Mine:(null); PubMed:(null); KEGG Mine:(null)	0.4174304937752919	25769803842	1740	1665_PL20210630_1740

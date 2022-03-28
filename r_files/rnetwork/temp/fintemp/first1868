@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+OVFGKWDBDOHQND	InChI=1S/C9H16N2O4S/c1-6(12)10-3-4-16-5-8(9(14)15)11-7(2)13/h8H,3-5H2,1-2H3,(H,10,12)(H,11,13)(H,14,15)	C9H16N2O4S	1	-126.39942603121881	N-Acetyl-S-(2-acetylaminoethyl)-L-cysteine	CC(=O)NCCSCC(C(=O)O)NC(=O)C	-0.899999976		PubChem:(29970632, 64142440, 95298352)	0.3281808609400607	2	1868	1783_PL20210630_1868

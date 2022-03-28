@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+GCCFMSAXQJECNH	InChI=1S/C19H39NO2/c1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-19(22)20-17-18-21/h21H,2-18H2,1H3,(H,20,22)	C19H39NO2	1	-66.6404086137732	Margaroyl-EA	CCCCCCCCCCCCCCCCC(=O)NCCO	6.69999981	17141174	PubChem:(14455158); COCONUT:(CNP0301654); additional:(null); Training Set:(null); PubMed:(null)	0.5054477368306746	2637890	1715	1641_PL20210630_1715

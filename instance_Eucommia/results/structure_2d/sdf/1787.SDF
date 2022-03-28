@@ -1,0 +1,154 @@
+ 
+  -OEChem-10192104042D
+
+ 23 24  0     0  0  0  0  0  0999 V2000
+    4.2324    2.0941    0.0000 S   0  0  0  0  0  0  0  0  0  0  0  0
+    3.9735    1.1281    0.0000 P   0  0  0  0  0  0  0  0  0  0  0  0
+    3.6030    2.4768    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0000    0.5099    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    5.3725    0.6193    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    2.4900   -1.0626    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    4.1630   -1.5108    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7147    0.1622    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.7369    1.9768    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.3420   -0.4298    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    5.1137   -0.3466    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.4559   -0.8037    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.9042   -2.4768    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.4322    2.5167    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.1940    1.6773    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.7636   -0.6531    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.5765   -1.0038    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.9187   -0.9352    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.7076   -0.5244    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.7619   -1.3504    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.3053   -2.3163    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7437   -3.0756    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5031   -2.6372    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+  1  2  2  0  0  0  0
+  2  3  1  0  0  0  0
+  2  4  1  0  0  0  0
+  2  5  1  0  0  0  0
+  3  9  1  0  0  0  0
+  4 10  1  0  0  0  0
+  5 11  1  0  0  0  0
+  6 12  2  0  0  0  0
+  7 12  1  0  0  0  0
+  7 13  1  0  0  0  0
+  7 20  1  0  0  0  0
+  8  9  1  0  0  0  0
+  8 10  1  0  0  0  0
+  8 11  1  0  0  0  0
+  8 12  1  0  0  0  0
+  9 14  1  0  0  0  0
+  9 15  1  0  0  0  0
+ 10 16  1  0  0  0  0
+ 10 17  1  0  0  0  0
+ 11 18  1  0  0  0  0
+ 11 19  1  0  0  0  0
+ 13 21  1  0  0  0  0
+ 13 22  1  0  0  0  0
+ 13 23  1  0  0  0  0
+M  END
+> <PUBCHEM_COMPOUND_CID>
+15264621
+
+> <PUBCHEM_COMPOUND_CANONICALIZED>
+1
+
+> <PUBCHEM_CACTVS_COMPLEXITY>
+263
+
+> <PUBCHEM_CACTVS_HBOND_ACCEPTOR>
+5
+
+> <PUBCHEM_CACTVS_HBOND_DONOR>
+1
+
+> <PUBCHEM_CACTVS_ROTATABLE_BOND>
+1
+
+> <PUBCHEM_CACTVS_SUBSKEYS>
+AAADccBiOAJAAAAAAAAAAAAAAAAAAAAAAAAkSJAAAAAAAAAAAAAAHgAQACAADgChgAYCAALAARAIAAEQEAAAAAAAAAAAAIEIAAAAAAQAAAAEAAADIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+
+> <PUBCHEM_IUPAC_OPENEYE_NAME>
+N-methyl-1-thioxo-2,6,7-trioxa-1lambda5-phosphabicyclo[2.2.2]octane-4-carboxamide
+
+> <PUBCHEM_IUPAC_CAS_NAME>
+N-methyl-1-sulfanylidene-2,6,7-trioxa-1lambda5-phosphabicyclo[2.2.2]octane-4-carboxamide
+
+> <PUBCHEM_IUPAC_NAME_MARKUP>
+<I>N</I>-methyl-1-sulfanylidene-2,6,7-trioxa-1&lambda;<SUP>5</SUP>-phosphabicyclo[2.2.2]octane-4-carboxamide
+
+> <PUBCHEM_IUPAC_NAME>
+N-methyl-1-sulfanylidene-2,6,7-trioxa-1lambda5-phosphabicyclo[2.2.2]octane-4-carboxamide
+
+> <PUBCHEM_IUPAC_SYSTEMATIC_NAME>
+N-methyl-1-sulfanylidene-2,6,7-trioxa-1lambda5-phosphabicyclo[2.2.2]octane-4-carboxamide
+
+> <PUBCHEM_IUPAC_TRADITIONAL_NAME>
+N-methyl-1-thioxo-2,6,7-trioxa-1lambda5-phosphabicyclo[2.2.2]octane-4-carboxamide
+
+> <PUBCHEM_IUPAC_INCHI>
+InChI=1S/C6H10NO4PS/c1-7-5(8)6-2-9-12(13,10-3-6)11-4-6/h2-4H2,1H3,(H,7,8)
+
+> <PUBCHEM_IUPAC_INCHIKEY>
+JJOQQNNPIHQMBT-UHFFFAOYSA-N
+
+> <PUBCHEM_XLOGP3_AA>
+-0.1
+
+> <PUBCHEM_EXACT_MASS>
+223.00681597
+
+> <PUBCHEM_MOLECULAR_FORMULA>
+C6H10NO4PS
+
+> <PUBCHEM_MOLECULAR_WEIGHT>
+223.19
+
+> <PUBCHEM_OPENEYE_CAN_SMILES>
+CNC(=O)C12COP(=S)(OC1)OC2
+
+> <PUBCHEM_OPENEYE_ISO_SMILES>
+CNC(=O)C12COP(=S)(OC1)OC2
+
+> <PUBCHEM_CACTVS_TPSA>
+88.9
+
+> <PUBCHEM_MONOISOTOPIC_WEIGHT>
+223.00681597
+
+> <PUBCHEM_TOTAL_CHARGE>
+0
+
+> <PUBCHEM_HEAVY_ATOM_COUNT>
+13
+
+> <PUBCHEM_ATOM_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ATOM_UDEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_BOND_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_BOND_UDEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ISOTOPIC_ATOM_COUNT>
+0
+
+> <PUBCHEM_COMPONENT_COUNT>
+1
+
+> <PUBCHEM_CACTVS_TAUTO_COUNT>
+-1
+
+> <PUBCHEM_COORDINATE_TYPE>
+1
+5
+255
+
+$$$$

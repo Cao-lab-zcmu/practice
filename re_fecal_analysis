@@ -1,0 +1,2779 @@
+
+### mice sample analyses
+### fecal
+
+### data
+### 
+
+mzmine_path="fecal_pos_mzmine.csv"
+
+savepath="fecal_pos_mzmine.tsv"
+
+awk -F , '
+  {
+  if(NR==1)
+    {
+    for(i=4; i<=NF; i++)
+      {
+      col_sample[$i]=i
+      }
+    l=asorti(col_sample,b)
+    \
+    printf $1 "\t" $2 "\t" $3 > "'$savepath'"
+    \
+    for(i=1; i<l; i++)
+      {
+      printf b[i] "\t" >> "'$savepath'"
+      }
+    printf b[l] "\n" >> "'$savepath'"
+    }
+  if(NR>=2)
+    {
+    printf $1"\t" $2"\t" $3 >> "'$savepath'"
+    \
+    for(i=1; i<l; i++)
+      {
+      printf $col_sample[b[i]] "\t" >> "'$savepath'"
+      }
+    printf $col_sample[b[l]] "\n" >> "'$savepath'"
+    }
+  }' $mzmine_path
+
+### for pca or pls-da
+
+data="fecal_pos_mzmine.tsv"
+
+savepath="fecal_pos_area.tsv"
+
+awk -F $'\t' '
+  {
+  if(FNR==1)
+    {
+    for(i=1; i<=NF; i++)
+      {
+      if($i~/ID/)
+        {
+        col_id=i
+        }
+      if($i~/retention/)
+        {
+        col_rt=i
+        }
+      if($i~/m\/z/)
+        {
+        col_mz=i
+        }
+      if($i~/area/)
+        {
+        split($i,a,"[ ]")
+        
+        num+=1
+        
+        max_num=num
+        
+        col_area[num]=i
+        
+        col_name[num]=a[1]
+        }
+      }
+    }
+  if(FNR>=2)
+    {
+    n+=1
+    
+    id_seq[n]=$col_id
+    
+    rt[$col_id]=$col_rt
+    
+    mz[$col_mz]=$col_mz
+    
+    for(i=1; i<=max_num; i++)
+      {
+      area[$col_id,i]=$col_area[i]
+      }
+    }
+  }
+  END{
+    printf "sample" > "'$savepath'"
+    
+    for(i=1; i<=n; i++)
+      {
+      printf "\t"id_seq[i] >> "'$savepath'"
+      }
+    printf "\n" >> "'$savepath'"
+    
+    for(i=1; i<=max_num; i++)
+      {
+      printf col_name[i] >> "'$savepath'"
+      
+      for(j=1; j<=n; j++)
+        {
+        printf "\t"area[id_seq[j],i] >> "'$savepath'"
+        }
+      printf "\n" >> "'$savepath'"
+      }
+    }' $data
+
+### metadata oganize
+
+data1="fecal_pos_area.tsv"
+
+data2="metadata.tsv"
+
+savepath="re_metadata.tsv"
+
+awk -F $'\t' '
+  {
+  if(NR==FNR && FNR>=2)
+    {
+    sort_sample[FNR]=$1
+    }
+  if(NR>FNR && FNR==1)
+    {
+    printf $0"\n" > "'$savepath'"
+    }
+  if(NR>FNR && FNR>=2)
+    {
+    data[$1]=$0
+    }
+  }
+  END{
+    for(i=2; i<=FNR; i++)
+      {
+      printf data[sort_sample[i]]"\n" >> "'$savepath'"
+      }
+    }' $data1 $data2
+
+mv $savepath "metadata.tsv"
+
+### new
+
+###############################
+###############################
+###############################
+###############################
+###############################
+###############################
+###############################
+###############################
+
+#mkdir pca_plsda
+
+mkdir re_pca_plsda
+
+array1[1]="Y"; array2[1]="S"
+
+array1[2]="Y"; array2[2]="M"
+
+array1[3]="S"; array2[3]="M"
+
+for k in 1 2 3
+
+do
+
+ for i in L M H ""
+
+ do
+    if [ ${array1[k]} != "M" ]; then compare1="${array1[k]}"$i; else compare1="M"; fi;
+    
+    if [ ${array2[k]} != "M" ]; then compare2="${array2[k]}"$i; else compare2="M"; fi;
+   
+   #compare2="M"
+
+   data1="re_fecal_pos_area.tsv"
+
+   data2="re_metadata.tsv"
+   
+   if [ "$i" != "" ]
+   
+   then
+   
+   savepath1="re_pca_plsda/${compare1}_${compare2}_${i}_pca.tsv"
+
+   savepath2="re_pca_plsda/metadata_${compare1}_${compare2}_${i}.tsv"
+   
+   else
+   
+   savepath1="re_pca_plsda/${compare1}_${compare2}_multi_pca.tsv"
+
+   savepath2="re_pca_plsda/metadata_${compare1}_${compare2}_multi.tsv"
+   
+   fi;
+   
+   awk -F $'\t' '
+     {
+     if(FNR==1)
+       {
+       if(FILENAME=="'$data1'")
+         {
+         print $0 > "'$savepath1'"
+         }
+       else
+         {
+         print $0 > "'$savepath2'"
+         }
+       }
+     if(FNR>=2)
+       {
+       if($1~/^'$compare1'/)
+         {
+         if(FILENAME=="'$data1'")
+           {
+           print $0 >> "'$savepath1'"
+           }
+         else
+            {
+           print $0 >> "'$savepath2'"
+           }
+         }
+       if($1~/^'$compare2'/)
+         {
+         if(FILENAME=="'$data1'")
+           {
+           print $0 >> "'$savepath1'"
+           }
+         else
+            {
+           print $0 >> "'$savepath2'"
+           }
+         }
+       }
+     }' $data1 $data2
+ done;
+
+done;
+
+###### control vs model
+
+compare1="C"
+
+compare2="M"
+
+i=control_model
+
+data1="re_fecal_pos_area.tsv"
+
+data2="re_metadata.tsv"
+
+savepath1="re_pca_plsda/${i}_pca.tsv"
+
+savepath2="re_pca_plsda/metadata_${i}.tsv"
+
+#data1="fecal_pos_area.tsv"
+
+#data2="metadata.tsv"
+
+#savepath1="pca_plsda/${compare1}_${compare2}_${i}_pca.tsv"
+
+#savepath2="pca_plsda/metadata_${compare1}_${compare2}_${i}.tsv"
+
+awk -F $'\t' '
+  {
+  if(FNR==1)
+    {
+    if(FILENAME=="'$data1'")
+      {
+      print $0 > "'$savepath1'"
+      }
+    else
+      {
+      print $0 > "'$savepath2'"
+      }
+    }
+  if(FNR>=2)
+    {
+    if($1~/^'$compare1'/)
+      {
+      if(FILENAME=="'$data1'")
+        {
+        print $0 >> "'$savepath1'"
+        }
+      else
+        {
+        print $0 >> "'$savepath2'"
+        }
+      }
+    if($1~/^'$compare2'/)
+      {
+      if(FILENAME=="'$data1'")
+        {
+        print $0 >> "'$savepath1'"
+        }
+      else
+        {
+        print $0 >> "'$savepath2'"
+        }
+      }
+    }
+  }' $data1 $data2
+
+#### control vs model vs Eucommia high
+
+data1="re_fecal_pos_area.tsv"
+
+data2="re_metadata.tsv"
+
+for deep in H L M ""
+
+do
+
+compare1="C"
+
+compare2="M"
+
+compare3="Y$deep"
+
+compare4="S$deep"
+
+if [ "$deep" == "" ]
+
+then
+
+deep="multi"
+
+fi;
+
+i=control_model_Eu_"$deep"
+
+#data1="fecal_pos_area.tsv"
+
+#data2="metadata.tsv"
+
+savepath1="re_pca_plsda/${i}_multi_pca.tsv"
+
+savepath2="re_pca_plsda/metadata_${i}_multi.tsv"
+
+awk -F $'\t' '
+  {
+  if(FNR==1)
+    {
+    if(FILENAME=="'$data1'")
+      {
+      print $0 > "'$savepath1'"
+      }
+    else
+      {
+      print $0 > "'$savepath2'"
+      }
+    }
+  if(FNR>=2)
+    {
+    if($1~/^'$compare1'/)
+      {
+      if(FILENAME=="'$data1'")
+        {
+        print $0 >> "'$savepath1'"
+        }
+      else
+        {
+        print $0 >> "'$savepath2'"
+        }
+      }
+    if($1~/^'$compare2'/)
+      {
+      if(FILENAME=="'$data1'")
+        {
+        print $0 >> "'$savepath1'"
+        }
+      else
+        {
+        print $0 >> "'$savepath2'"
+        }
+      }
+    if($1~/^'$compare3'/)
+      {
+      if(FILENAME=="'$data1'")
+        {
+        print $0 >> "'$savepath1'"
+        }
+      else
+        {
+        print $0 >> "'$savepath2'"
+        }
+      }
+    if($1~/^'$compare4'/)
+      {
+      if(FILENAME=="'$data1'")
+        {
+        print $0 >> "'$savepath1'"
+        }
+      else
+        {
+        print $0 >> "'$savepath2'"
+        }
+      }
+    }
+  }' $data1 $data2
+  
+done;
+
+####
+
+wd="re_pca_plsda"
+
+Rscript ~/Downloads/codes/pca_ggbiplot.R $wd
+
+########
+
+## facet grid pca ggplot
+
+Rscript ~/Downloads/codes/pca_prcomp.R $wd
+
+########
+
+data1="re_pca_plsda/metadata*.tsv"
+
+data2="re_pca_plsda/*.prcomp"
+
+savepath="re_pca_plsda/pca_facet.tsv"
+
+escape="control_model.prcomp"
+
+other="control_model_Eu"
+
+awk -F $'\t' '
+  {
+  if(FILENAME~/metadata/)
+    {
+    if(FNR==1)
+      {
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/subgroup/)
+          {
+          col_subgroup=i
+          }
+        if($i~/file/)
+          {
+          col_file=i
+          }
+        }
+     n1=split(FILENAME,a,"[/]")
+     
+     n2=split(a[n1],b,"[m][e][t][a][d][a][t][a][_]||[.]")
+     
+     file=b[2]
+     
+     file_set[file]=file
+      }
+    if(FNR>=2)
+      {
+      nrows[file]=FNR
+      
+      data[file,$col_file]=$0
+      
+      subgroup[file,$col_file]=$col_subgroup
+      }
+    }
+  if(FILENAME~/.prcomp/)
+    {
+    if(FILENAME~/'$escape'/)
+      {
+      nextfile;
+      }
+    if(FNR==1)
+      {
+     n1=split(FILENAME,a,"[/]")
+     
+     n2=split(a[n1],b,"[.]")
+     
+     file=b[1]
+     
+     n3=split(file,c,"[_]")
+     
+     if(file~/'$other'/)
+       {
+       g1_from="multi"
+       
+       g2_deep=c[n3-1]
+       }
+     else
+       {
+       g1_from=substr(c[1],1,1)"_"substr(c[2],1,1)
+       
+       g2_deep=c[3]
+       }
+     num+=1
+     
+     if(num==1)
+       {
+       printf "sample\t"  "PC1\t"  "PC2\t"  "subgroup\t"  "g1_from\t"  "g2_deep\t"  "figure\n" > "'$savepath'"
+       }
+     
+      }
+    if(FNR>=2)
+      {
+      if($1=="summary")
+        {
+        printf "anno\t"  "PC1\t"  "proportion\t"  "anno\t"  g1_from"\t"  g2_deep"\t"  $2"\n" >> "'$savepath'"
+        
+        printf "anno\t"  "PC2\t"  "proportion\t"  "anno\t"  g1_from"\t"  g2_deep"\t"  $3"\n" >> "'$savepath'"
+        }
+      if($1!="summary")
+        {
+        printf $1"\t"  $2"\t"  $3"\t"  subgroup[file,$1]"\t"  g1_from"\t"  g2_deep"\n" >> "'$savepath'"
+        
+        print FILENAME,subgroup[file,$1],$1,g1_from
+        }
+      }
+    }
+  }' $data1 $data2
+
+########
+
+wd="re_pca_plsda"
+
+Rscript ~/Downloads/codes/pca_facet_ggplot.R $wd
+
+########
+
+mkdir re_pca_plsda/opls_da
+
+data="re_pca_plsda/*.tsv"
+
+savepath="re_pca_plsda/opls_da/"
+
+awk -F $'\t' '
+  {
+  if(FNR==1)
+    {
+    n=split(FILENAME,a,"[/]")
+    
+    file=a[n]
+    }
+  if(file~/multi/)
+    {
+    nextfile;
+    }
+  if(file~/pca.tsv/ || file~/metadata/)
+    {
+    if(FNR==1)
+      {
+      printf $0"\n" > "'$savepath'"file
+      }
+    if(FNR>=2)
+      {
+      printf $0"\n" >> "'$savepath'"file
+      }
+    }
+  }' $data
+
+wd="re_pca_plsda/opls_da"
+
+Rscript ~/Downloads/codes/opls_da.R $wd
+
+########
+
+### opls-da facet grid
+
+data1="re_pca_plsda/opls_da/metadata*.tsv"
+
+data2="re_pca_plsda/opls_da/*.ropls"
+
+sig=".ropls"
+
+savepath="re_pca_plsda/opls_da/opls_facet.tsv"
+
+escape="control_model.ropls"
+
+other="control_model_Eu"
+
+awk -F $'\t' '
+  {
+  if(FILENAME~/metadata/)
+    {
+    if(FNR==1)
+      {
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/subgroup/)
+          {
+          col_subgroup=i
+          }
+        if($i~/file/)
+          {
+          col_file=i
+          }
+        }
+     n1=split(FILENAME,a,"[/]")
+     
+     n2=split(a[n1],b,"[m][e][t][a][d][a][t][a][_]||[.]")
+     
+     file=b[2]
+     
+     file_set[file]=file
+      }
+    if(FNR>=2)
+      {
+      nrows[file]=FNR
+      
+      data[file,$col_file]=$0
+      
+      subgroup[file,$col_file]=$col_subgroup
+      }
+    }
+  if(FILENAME~/'$sig'/)
+    {
+    if(FILENAME~/'$escape'/)
+      {
+      nextfile;
+      }
+    if(FNR==1)
+      {
+     n1=split(FILENAME,a,"[/]")
+     
+     n2=split(a[n1],b,"[.]")
+     
+     file=b[1]
+     
+     n3=split(file,c,"[_]")
+     
+     if(file~/'$other'/)
+       {
+       g1_from="multi"
+       
+       g2_deep=c[n3-1]
+       }
+     else
+       {
+       g1_from=substr(c[1],1,1)"_"substr(c[2],1,1)
+       
+       g2_deep=c[3]
+       }
+     num+=1
+     
+     if(num==1)
+       {
+       printf "sample\t"  "PC1\t"  "PC2\t"  "subgroup\t"  "g1_from\t"  "g2_deep\t"  "figure\n" > "'$savepath'"
+       }
+     
+      }
+    if(FNR>=2)
+      {
+      if($1=="summary")
+        {
+        printf "anno\t"  "PC1\t"  "proportion\t"  "anno\t"  g1_from"\t"  g2_deep"\t"  $2"\n" >> "'$savepath'"
+        
+        printf "anno\t"  "PC2\t"  "proportion\t"  "anno\t"  g1_from"\t"  g2_deep"\t"  $3"\n" >> "'$savepath'"
+        }
+      if($1!="summary")
+        {
+        printf $1"\t"  $2"\t"  $3"\t"  subgroup[file,$1]"\t"  g1_from"\t"  g2_deep"\n" >> "'$savepath'"
+        
+        print FILENAME,subgroup[file,$1],$1,g1_from
+        }
+      }
+    }
+  }' $data1 $data2
+
+wd="re_pca_plsda/opls_da"
+
+Rscript ~/Downloads/codes/opls_facet_ggplot.R $wd
+
+########
+
+### for valcano plot
+
+data1="re_metadata.tsv"
+
+data2="re_fecal_pos_area.tsv"
+
+savepath="fecal_pos_volcano.tsv"
+
+awk -F $'\t' '
+  {
+  if(NR==FNR)
+    {
+    if(FNR==1)
+      {
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/file/)
+          {
+          col_file=i
+          }
+        if($i~/subgroup/)
+          {
+          col_subgroup=i
+          }
+        }
+      title=$col_subgroup
+      }
+    if(FNR>=2)
+      {
+      meta[$col_file]=$col_subgroup
+      }
+    }
+  if(NR>FNR)
+    {
+    if(FNR==1)
+      {
+      printf title > "'$savepath'"
+      
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/sample/)
+          {
+          col_sample=i
+          }
+        if(i!=col_sample)
+          {
+          printf "\t"$i >> "'$savepath'"
+          }
+        }
+      printf "\n" >> "'$savepath'"
+      }
+    if(FNR>=2)
+      {
+      for(i in meta)
+        {
+        if(i == $col_sample)
+          {
+          printf meta[i] >> "'$savepath'"
+          
+          for(j=1; j<=NF; j++)
+            {
+            if(j!=col_sample)
+              {
+              printf "\t"$j >> "'$savepath'"
+              }
+            }
+          printf "\n" >> "'$savepath'"
+          
+          break;
+          }
+        }
+      }
+    }
+  }' $data1 $data2
+
+#######################################################################################################################
+
+Rscript ~/Downloads/codes/ttest_volcano.R
+
+####################
+
+mkdir volcano
+
+data="volcano_ttest/*"
+
+savepath="volcano/"
+
+awk -F "|" '
+  {
+  if(FNR==1)
+    {
+    n=split(FILENAME,a,"[/]")
+    
+    file=a[n]
+    
+    for(i=1; i<=NF; i++)
+      {
+      if($i~/^id$/)
+        {
+        col_id=i
+        }
+      if($i~/p-value/)
+        {
+        col_p=i
+        }
+      if($i~/^fold/)
+        {
+        col_fold=i
+        }
+      }
+    printf $col_id"\t"  $col_p"\t"  $col_fold"\n" > "'$savepath'" file ".tsv"
+    }
+  if(FNR>=2)
+    {
+    if($col_fold==0)
+      {
+      norm=15
+      }
+    else
+      {
+      norm=log($col_fold)/log(2)
+      }
+    printf $col_id"\t"  $col_p"\t"  norm"\n" >> "'$savepath'" file ".tsv"
+    }
+  }' $data
+
+###############################
+
+Rscript ~/Downloads/codes/volcano.R
+
+###############################
+
+### facet_grid volcano
+
+data="volcano/*.tsv"
+
+savepath="volcano/volcano_facet"
+
+awk -F "[:]||[\t]" '
+  {
+  if(FNR==1)
+    {
+    num+=1
+    
+    for(i=1; i<=NF; i++)
+      {
+      if($i~/^id/)
+        {
+        col_id=i
+        }
+      if($i~/p-value/)
+        {
+        col_p=i
+        }
+      if($i~/fold/)
+        {
+        col_fold=i
+        }
+      if($i~/\//)
+        {
+        from_which=$i
+        }
+      }
+    n=split(from_which,a,"[/]||[_]")
+    
+    deep=a[n]
+    
+    print n,deep
+    
+    if(n>=4)
+      {
+      from_which=a[1]"/"a[3]
+      }
+    else if(n==3)
+      {
+      from_which=a[1]"/"a[2]
+      }
+    if(num==1)
+      {
+      printf $col_id"\t"  $col_p"\t"  $col_fold"\t"  "g1_from\t"  "g2_deep\n" > "'$savepath'"
+      }
+    }
+  if(FNR>=2 && n!=2)
+    {
+    printf $col_id"\t"  $col_p"\t"  $col_fold"\t"  from_which"\t"  deep"\n" >> "'$savepath'"
+    }
+  }' $data
+
+##############################
+
+Rscript ~/Downloads/codes/volcano_facet.R
+
+##############################
+
+### vip-p plot
+
+data1="volcano/*@*.tsv"
+
+data2="re_pca_plsda/opls_da/*.vip"
+
+savepath="re_pca_plsda/opls_da/"
+
+awk -F $'\t' '
+  BEGIN{
+    array["p"]="Y"
+    
+    array["r"]="S"
+    
+    array["m"]="M"
+    
+    array["c"]="C"
+    }
+  {
+  if(FILENAME~/volcano/)
+    {
+    num1+=1
+    
+    if(FNR==1)
+      {
+      n=split(FILENAME,a,"[/]||[.]")
+      
+      file=a[n-1]
+      
+      split(file,b,"[@]")
+      
+      compare[1]=array[substr(b[1],1,1)]
+      
+      compare[2]=array[substr(b[2],1,1)]
+      
+      asort(compare,com_sort)
+      
+      if(com_sort[1]!="C" && com_sort[2]!="M")
+       {
+       m=split(file,c,"[_]")
+       
+       deep=toupper(substr(c[m],1,1))
+       }
+     else
+       {
+       deep=""
+       }
+      if(file~/model@control/)
+        {
+        print FILENAME,compare[1],compare[2],m,c[m]
+        }
+      
+      print "source file: "com_sort[1]," vs ",com_sort[2]," @ ",deep
+      
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/p-value/)
+          {
+          col_p=i
+          }
+        if($i~/^id/)
+          {
+          col_id=i
+          }
+        if($i~/fold/)
+          {
+          col_fold=i
+          }
+        }
+      split($col_fold,d,"[:]")
+      
+      data_file[com_sort[1],com_sort[2],deep]=d[2]
+      }
+    if(FNR>=2)
+      {
+      data[com_sort[1],com_sort[2],deep,$col_id]=$col_p
+      
+      data_FC[com_sort[1],com_sort[2],deep,$col_id]=$col_fold
+      }
+    }
+  if(FILENAME~/opls_da/)
+    {
+    if(FNR==1)
+      {
+      num2+=1
+      
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/^id/)
+          {
+          col_id=i
+          }
+        if($i~/^vip/)
+          {
+          col_vip=i
+          }
+        }
+      n=split(FILENAME,a,"[/]||[.]")
+      
+      file=a[n-1]
+      
+      split(file,b,"[_]")
+      
+      compare[1]=toupper(substr(b[1],1,1))
+      
+      compare[2]=toupper(substr(b[2],1,1))
+      
+      deep=substr(b[3],1,1)
+      
+      asort(compare,com_sort)
+      
+      print "target file: ",com_sort[1]," vs ",com_sort[2]," @ ",deep
+      
+      printf $0"\t" "p-value(t.test)\t" "fold: "data_file[com_sort[1],com_sort[2],deep]"\n" \
+      \
+      > "'$savepath'" file ".vip_p"
+      }
+    if(FNR>=2)
+      {
+      printf $0"\t" data[com_sort[1],com_sort[2],deep,$col_id]"\t" data_FC[com_sort[1],com_sort[2],deep,$col_id]"\n" \
+      \
+      >> "'$savepath'" file ".vip_p"
+      }
+    }
+  }' $data1 $data2
+
+############################
+
+wd="re_pca_plsda/opls_da"
+
+Rscript ~/Downloads/codes/vip_p.R $wd
+
+### facet vip_p plot
+
+data="re_pca_plsda/opls_da/*.vip_p"
+
+sig=".vip_p"
+
+savepath="re_pca_plsda/opls_da/vip_p_facet.tsv"
+
+escape="control_model.vip_p"
+
+other="control_model_Eu"
+
+awk -F $'\t' '
+  {
+  if(FILENAME~/'$sig'/)
+    {
+    if(FILENAME~/'$escape'/)
+      {
+      nextfile;
+      }
+    if(FNR==1)
+      {
+     n1=split(FILENAME,a,"[/]")
+     
+     n2=split(a[n1],b,"[.]")
+     
+     file=b[1]
+     
+     n3=split(file,c,"[_]")
+     
+     if(file~/'$other'/)
+       {
+       g1_from="multi"
+       
+       g2_deep=c[n3-1]
+       }
+     else
+       {
+       g1_from=substr(c[1],1,1)"_"substr(c[2],1,1)
+       
+       g2_deep=c[3]
+       }
+     num+=1
+     
+     if(num==1)
+       {
+       for(i=1; i<=NF; i++)
+         {
+         if($i~/^id/)
+           {
+           col_id=i
+           }
+         if($i~/p-value/)
+           {
+           col_p=i
+           }
+         if($i~/fold/)
+           {
+           col_fold=i
+           }
+         if($i~/vip/)
+           {
+           col_vip=i
+           }
+         }
+       printf $col_id"\t"  $col_vip"\t"  $col_p"\t"  "FC\t"  "group\t"  "g1_from\t"  "g2_deep\n" > "'$savepath'"
+       }
+     group=$col_fold
+      }
+    if(FNR>=2)
+      {
+      if($1!="summary")
+        {
+        printf $col_id"\t"  $col_vip"\t"  $col_p"\t"  $col_fold"\t"  group"\t"  g1_from"\t"  g2_deep"\n" >> "'$savepath'"
+        }
+      }
+    }
+  }' $data
+
+########
+
+wd="re_pca_plsda/opls_da"
+
+Rscript ~/Downloads/codes/vip_p_facet.R $wd
+
+########
+
+
+########
+### filter error sample
+
+name1="C5"
+
+name2="YH9"
+
+name3="YH6_1"
+
+name4="YL4"
+
+name5="SM6"
+
+data="fecal_pos_area.tsv"
+
+savepath="re_fecal_pos_area.tsv"
+
+awk -F $'\t' '
+  {
+  if($1~/'$name1'/ || $1~/'$name2'/ || $1~/'$name3'/ || $1~/'$name4'/ || $1~/'$name5'/)
+    {
+    next;
+    }
+  else
+    {
+    print $0
+    }
+  }' $data > $savepath
+
+data="metadata.tsv"
+
+savepath="re_metadata.tsv"
+
+awk -F $'\t' '
+  {
+  if($1~/'$name1'/ || $1~/'$name2'/ || $1~/'$name3'/ || $1~/'$name4'/ || $1~/'$name5'/)
+    {
+    next;
+    }
+  else
+    {
+    print $0
+    }
+  }' $data > $savepath
+
+### m/z versus rt bubble plot
+
+### re pca_file    ↑↑↑↑↑↑↑
+
+######################################
+
+# opls-da plot
+ 
+ wd="re_pca_plsda"
+ 
+ Rscript ~/Downloads/codes/opls_da.R $wd
+ 
+ 
+######################################
+
+### filter combine for sunplot -----and stat
+ 
+ data1="re_pca_plsda/opls_da/vip_p_facet.tsv"
+ 
+ data2="re_pca_plsda/opls_da/control_model.vip_p"
+ 
+ savepath="volcano_sun.tsv"
+ 
+ savepath_stat="stat_vip_p_FC.tsv"
+ 
+ awk -F $'\t' '
+   {
+   if(FILENAME~/vip_p_facet/)
+     {
+    if(FNR==1)
+      {
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/^id/)
+          {
+          col_id=i
+          }
+        if($i~/^vip/)
+          {
+          col_vip=i
+          }
+        if($i~/p-value/)
+          {
+          col_p=i
+          }
+        if($i~/FC/)
+          {
+          col_FC=i
+          }
+        if($i~/group/)
+          {
+          col_group=i
+          }
+        }
+      printf $0"\n" > "'$savepath'"
+      }
+    if(FNR>=2)
+      {
+      if(sprintf("%.4f",$col_p)<0.05)
+        {
+        if(sprintf("%.4f",$col_vip)>1)
+          {
+          if(sprintf("%.4f",$col_FC)>1 || (-1)*sprintf("%.4f",$col_FC)>1)
+            {
+            printf $0"\n" >> "'$savepath'"
+            
+            all_id[$col_id]=$col_id
+            
+            group_stat[$col_group]=$col_group
+            
+            group_id[$col_group,$col_id]=$col_id
+            
+            group_group[$col_group,$col_id]=$col_group
+            }
+          }
+        }
+      }
+    }
+   if(FILENAME~/control_model.vip_p/)
+     {
+     if(FNR==1)
+       {
+       for(i=1; i<=NF; i++)
+         {
+         if($i~/fold/)
+           {
+           control_group=$i
+           
+           n=split($i,a,"[:][ ]")
+           
+           split(a[n],b,"[/]")
+           
+           g1_from=toupper(substr(b[1],1,1))"_"toupper(substr(b[2],1,1))
+           
+           g2_deep="N"
+           }
+         }
+       group_stat[control_group]=control_group
+       }
+     if(FNR>=2)
+       {
+       if(sprintf("%.4f",$col_p)<0.05)
+        {
+        if(sprintf("%.4f",$col_vip)>1)
+          {
+          if(sprintf("%.4f",$col_FC)>1 || (-1)*sprintf("%.4f",$col_FC)>1)
+            {
+            printf $0"\t"  control_group"\t"  g1_from"\t"  g2_deep"\n" >> "'$savepath'"
+            
+            all_id[$col_id]=$col_id
+            
+            group_id[control_group,$col_id]=$col_id
+            
+            group_group[control_group,$col_id]=control_group
+            }
+          }
+        }
+       }
+     }
+   }
+   END{
+     for(i in all_id)
+       {
+       num+=1
+       }
+     print "Info: the number of all features filtered is " num
+     
+     print "P < 0.05; VIP > 1; |log2(FC)| > 1"
+     
+     print "The groups as following:"
+     
+     printf "Group\t"  "Features number\n" > "'$savepath_stat'"
+     
+     n=asorti(group_stat,sort_rank)
+     
+     for(i=1; i<=n; i++)
+       {
+       group_num+=1
+       
+       printf sort_rank[i]"\t"
+       
+       printf sort_rank[i]"\t" >> "'$savepath_stat'"
+       
+       for(j in group_id)
+         {
+         if(j~sort_rank[i])
+           {
+           the_group_num[sort_rank[i]]+=1
+           }
+         }
+       printf the_group_num[sort_rank[i]]"\n"
+       
+       printf the_group_num[sort_rank[i]]"\n" >> "'$savepath_stat'"
+       }
+     printf "all features\t"  num"\n" >> "'$savepath_stat'"
+     
+     printf "annonation\t"  "P < 0.05; VIP > 1; |log2(FC)| > 1\n" >> "'$savepath_stat'"
+     
+     printf "There are "  group_num  " groups\n"
+     }' $data1 $data2
+
+##############################
+
+ wd="."
+ 
+ file="stat_vip_p_FC.tsv"
+ 
+ Rscript ~/Downloads/codes/barplot_horizental.R $wd $file
+
+##############################
+
+### chemical_index data reformat
+
+mkdir chemical_index
+
+data1="metadata.tsv"
+
+data2="chemical_index.tsv"
+
+savepath="chemical_index/"
+
+awk -F $'\t' '
+  BEGIN{
+    chemical="ALB_TCH_TG_Urea_UA_CR"
+      
+    n=split(chemical,x,"[_]")
+    
+    chemical_unit[x[1]]="g/L"
+    
+    chemical_unit[x[2]]="mmol/L"
+    
+    chemical_unit[x[3]]="mmol/L"
+    
+    chemical_unit[x[4]]="mmol/L"
+    
+    chemical_unit[x[5]]="μmol/L"
+    
+    chemical_unit[x[6]]="μmol/L"
+    }
+  {
+  if(FILENAME~/metadata/)
+    {
+    if(FNR==1)
+      {
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/subgroup/)
+          {
+          col_subgroup=i
+          }
+        if($i~/name/)
+          {
+          col_name=i
+          }
+        if($i~/group/)
+          {
+          col_group=i
+          }
+        }
+      }
+    if(FNR>=2)
+     {
+     name[$col_name]=$col_name
+     
+     subgroup[$col_name]=$col_subgroup
+     
+     group[$col_name]=$col_group
+     }
+    }
+  if(FILENAME~/chemical/)
+    {
+   if(FNR==1)
+      {
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/name/)
+          {
+          col_name=i
+          }
+        }
+      chemical="ALB_TCH_TG_Urea_UA_CR"
+      
+      n=split(chemical,x,"[_]")
+      
+     for(i=1; i<=NF; i++)
+       {
+       for(j in x)
+         {
+         if($i~x[j])
+           {
+           col_chemical[x[j]]=i
+           }
+         }
+       }
+     }
+   if(FNR>=2)
+     {
+     for(i in x)
+       {
+       sample[$col_name]=$col_name
+       
+       data_chemical[x[i],$col_name]=$col_chemical[x[i]]
+       }
+     }
+   }
+  }
+  END{
+    printf "sample\t"  "level\t"  "subgroup\t"  "group\t"  "index\t"  "unit\n" \
+    \
+    > "'$savepath'chemical_facet.tsv"
+    
+    for(i in x)
+      {
+      printf "sample\t"  x[i]"(" chemical_unit[x[i]] ")\t"  "subgroup\t"  "group\n" > "'$savepath'" x[i] ".tsv"
+      
+      n=asorti(sample,sample_sort)
+    
+      for(j=1; j<=n; j++)
+        {
+        if(subgroup[sample_sort[j]]=="")
+          {
+          m=split(sample_sort[j],a,"[_]")
+          
+          belongs[sample_sort[j]]=a[1]
+          
+          for(k=2; k<m; k++)
+            {
+            belongs[sample_sort[j]]=belongs[sample_sort[j]]"_"a[k]
+            }
+          for(k in subgroup)
+            {
+            if((k~belongs[sample_sort[j]]) && (subgroup[k]!=""))
+              {
+              print "catch " sample_sort[j] " >>> "belongs[sample_sort[j]],k,sugroup[k],group[k]
+              
+              subgroup[sample_sort[j]]=subgroup[k]
+              
+              group[sample_sort[j]]=group[k]
+              
+              break;
+              }
+            }
+          delete belongs;
+          }
+        printf sample_sort[j]"\t"  data_chemical[x[i],sample_sort[j]]"\t" \
+        \
+        subgroup[sample_sort[j]]"\t"  group[sample_sort[j]]"\n" >> "'$savepath'" x[i] ".tsv"
+        
+        printf sample_sort[j]"\t"  data_chemical[x[i],sample_sort[j]]"\t" \
+        \
+        subgroup[sample_sort[j]]"\t"  group[sample_sort[j]]"\t" \
+        \
+        x[i]"\t"  chemical_unit[x[i]]"\n" \
+        \
+        >> "'$savepath'chemical_facet.tsv"
+        }
+      }
+    }' $data1 $data2
+
+######### blood_chemical_plot
+ 
+ wd="chemical_index"
+ 
+ file="chemical_facet.tsv"
+ 
+ Rscript ~/Downloads/codes/blood_chemical.R $wd $file
+ 
+
+############################
+### for Correlation Analysis 
+
+data1="re_metadata.tsv"
+
+data2="volcano_sun.tsv"
+
+data3="chemical_index/filter_chemical_index_2021-10-05.tsv"
+
+data4="re_fecal_pos_area.tsv"
+
+savepath="fecal_pos_correlation.tsv"
+
+escape1="Blank"
+
+escape2="_1"
+
+awk -F $'\t' '
+  {
+  if(FILENAME~/metadata/)
+    { 
+    if(FNR==1)
+      {
+     for(i=1; i<=NF; i++)
+       {
+       if($i~/file/)
+         {
+         col_file=i
+         }
+       if($i~/name/)
+         {
+         col_name=i
+         }
+       if($i~/subgroup/)
+         {
+         col_subgroup=i
+         }
+       if($i~/group/)
+         {
+         col_group=i
+         }
+       }
+     }
+   if(FNR>=2)
+     {
+     name[$col_file]=$col_name
+     
+     subgroup[$col_file]=$col_subgroup
+     
+     group[$col_group]=$col_group
+     }
+   }
+ if(FILENAME~/volcano/)
+   {
+   if(FNR==1)
+      {
+     for(i=1; i<=NF; i++)
+       {
+       if($i~/^id/)
+         {
+         col_id=i
+         }
+       if($i~/group/)
+         {
+         col_group=i ### group1 compare with group 2
+         }
+       if($i~/FC/)
+         {
+         col_fold=i
+         }
+       }
+     }
+   if(FNR>=2)
+     {
+     filter_id[$col_id]=$col_id
+     }
+   }
+ if(FILENAME~/chemical_index/)
+   {
+   if(FNR==1)
+      {
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/sample/)
+          {
+          col_sample=i
+          }
+        if($i~/level/)
+          {
+          col_level=i
+          }
+        if($i~/index/)
+          {
+          col_index=i
+          }
+        }
+     }
+   if(FNR>=2)
+     {
+     if(($col_index~/CR/) || ($col_index~/Urea/))
+       {
+       data_chemical[$col_index,$col_sample]=$col_level
+     
+       species[$col_index]=$col_index
+       }
+     }
+   }
+ if(FILENAME~/area/)
+   {
+   if(FNR==1)
+      {
+      n=asorti(species,x)
+      
+     col_sample=1
+     
+     printf $col_sample > "'$savepath'"
+     
+     printf "\tsubgroup" > "'$savepath'"
+     
+     for(i=2; i<=NF; i++)
+       {
+       col_id_set[$i]=i
+       
+       get_id[i]=$i
+       }
+     for(i=1; i<=n; i++)
+       {
+       printf "\t"x[i] >> "'$savepath'"
+       }
+     id_num=asort(filter_id,sort_id)
+     
+     print id_num
+     
+     for(i=1; i<=id_num; i++)
+       {
+       printf sort_id[i]"\t" 
+       
+       printf "\t"sort_id[i] >> "'$savepath'"
+       }
+     printf "\n"
+     
+     printf "\n" >> "'$savepath'"
+     }
+   if(FNR>=2)
+     {
+     if($1~/'$escape2'/)
+       {
+       next;
+       }
+     if($1~/'$escape1'/)
+       {
+       next;
+       }
+     printf $col_sample >> "'$savepath'"
+     
+     printf "\t"subgroup[$col_sample] >> "'$savepath'"
+     
+     for(i=1; i<=n; i++)
+       {
+       printf "\t"data_chemical[x[i],name[$col_sample]] >> "'$savepath'"
+       }
+     for(i=1; i<=id_num; i++)
+       {
+       printf "\t"$col_id_set[sort_id[i]] >> "'$savepath'"
+       }
+     printf "\n" >> "'$savepath'"
+     }
+   }
+  }' $data1 $data2 $data3 $data4
+
+#### attach to R
+
+###..........
+
+Rscript ~/Downloads/codes/pearson_correlation.R
+
+#### pearson p-value
+
+data="correlation/pearson_p_value"
+
+savepath="fecal_pos_chem_pearson.tsv"
+
+p_limit="0.05"
+
+r_limit="0"
+
+awk -F "[|]" '
+  {
+  if(FNR==1)
+    {
+    printf "id\t"  "factor\t"  "r\t"  "p-value\n" > "'$savepath'"
+    
+    for(i=1; i<=NF; i++)
+      {
+      if($i~/^id/)
+        {
+        col_id=i
+        }
+      if($i~/factor/)
+        {
+        col_factor=i
+        }
+      if($i~/^r$/)
+        {
+        col_r=i
+        }
+      if($i~/value/)
+        {
+        col_value=i
+        }
+      }
+    }
+  if(FNR>=2)
+    {
+    if(($col_factor~/Urea/) || ($col_factor~/CR/))
+      {
+      norm=sprintf("%.3f",$col_value)
+      
+     if(norm<="'$p_limit'")
+       {
+       norm_r=sprintf("%.3f",$col_r)
+       
+       rlimit="'$r_limit'"
+       
+       if((norm_r > rlimit) || (-1*norm_r > rlimit))
+         {
+         printf $col_id"\t"  $col_factor"\t"  $col_r"\t"  $col_value"\n" >> "'$savepath'"
+         
+         pearson_number+=1
+         }
+       }
+      }
+    }
+  }
+  END{
+    print pearson_number
+    }' $data
+
+###########################
+ 
+ wd="."
+ 
+ nodes="fecal_pos_mzmine.tsv"
+ 
+ edges="fecal_pos_chem_pearson.tsv"
+ 
+ Rscript ~/Downloads/codes/ggraph_network.R $wd $nodes $edges
+
+###########################
+
+#### pearson for linear regression
+
+mkdir linear_regression
+
+data1="fecal_pos_chem_pearson.tsv"
+
+data2="fecal_pos_correlation.tsv"
+
+savepath="linear_regression/"
+
+awk -F $'\t' '
+  {
+  if(NR==FNR)
+    {
+    if(FNR==1)
+      {
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/^id/)
+          {
+          col_id=i
+          }
+        if($i~/factor/)
+          {
+          col_factor=i
+          }
+        if($i~/^r$/)
+          {
+          col_r=i
+          }
+        if($i~/p-value/)
+          {
+          col_p=i
+          }
+        }
+      }
+    if(FNR>=2)
+      {
+      id[$col_id]=$col_id
+      
+      chem[$col_factor]=$col_factor
+      
+      the_id[FNR]=$col_id
+      
+      the_factor[FNR]=$col_factor
+      
+      n1_r[FNR]=$col_r
+      
+      n1_p[FNR]=$col_p
+      
+      n1=FNR
+      }
+    }
+  if(NR>FNR)
+    {
+    if(FNR==1)
+      {
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/sample/)
+          {
+          col_sample=i
+          }
+        if($i~/subgroup/)
+          {
+          col_subgroup=i
+          }
+        for(j in chem)
+          {
+          if($i~j)
+            {
+            col_chem[j]=i
+            }
+          }
+        for(j in id)
+          {
+          if($i~j)
+            {
+            col_n2_id[j]=i
+            }
+          }
+        }
+      }
+    if(FNR>=2)
+      {
+      subgroup[$col_sample]=$col_subgroup
+      
+      for(i in chem)
+        {
+        data_chem[$col_sample,i]=$col_chem[i]
+        }
+      for(i in id)
+        {
+        data_area[$col_sample,i]=$col_n2_id[i]
+        }
+      }
+    }
+  }
+  END{
+    for(i=2; i<=n1; i++)
+      {
+      printf "sample\t"  "subgroup\t"  "chem\t"  "id_content\t"  "r(pearson)\t"  "p-value\n" \
+      \
+      > "'$savepath'"  the_factor[i]  "_vs_"  the_id[i]  ".tsv"
+      
+      for(j in subgroup)
+        {
+        printf j"\t"  subgroup[j]"\t"  data_chem[j,the_factor[i]]"\t"  data_area[j,the_id[i]] \
+        \
+        >> "'$savepath'"  the_factor[i]  "_vs_"  the_id[i]  ".tsv"
+        
+        num[i]+=1
+        
+        if(num[i]==1)
+          {
+          printf "\t"n1_r[i]"\t"  n1_p[i] >> "'$savepath'"  the_factor[i]  "_vs_"  the_id[i]  ".tsv"
+          }
+        printf "\n" >> "'$savepath'"  the_factor[i]  "_vs_"  the_id[i]  ".tsv"
+        }
+      }
+    }' $data1 $data2
+
+#### attach to R
+
+###..........
+
+Rscript ~/Downloads/codes/linear_regression.R
+
+#### filter for volcano_sun.tsv
+
+data1="fecal_pos_chem_pearson.tsv"
+
+data2="volcano_sun.tsv"
+
+savepath="pearson_filter_volcano_sun.tsv"
+
+awk -F $'\t' '
+  {
+  if(NR==FNR)
+    {
+    if(FNR>=2)
+      {
+      id[$1]=$1
+      }
+    }
+  if(NR>FNR)
+    {
+    if(FNR==1)
+      {
+      printf $0"\n" > "'$savepath'"
+      
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/^id$/)
+          {
+          col_id=i
+          }
+        }
+      }
+    if(FNR>=2)
+      {
+      for(i in id)
+        {
+        if(i==$col_id)
+          {
+          printf $0"\n" >> "'$savepath'"
+          }
+        }
+      }
+    }
+  }' $data1 $data2
+
+#####################
+
+Rscript ~/Downloads/codes/colorful_3_for_volcano.R ### need revise
+
+#####################
+
+## KEGG pathway enrichment
+ 
+# export https_proxy="https://proxy-XXXXX:"
+
+## echo "   123" | awk '{sub(/^[]*/,"");print}'
+
+Rscript ~/Downloads/codes/kegg_get.R
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#####################
+
+###
+
+data1="fecal_pos_chem_pearson.tsv"
+
+data2="fecal_pos_mzmine.tsv"
+
+savepath="/media/wizard/back/nanjing_sample/fecal/pos_mzml/EIC_metadata.tsv"
+
+awk -F $'\t' '
+  {
+  if(NR==FNR)
+    {
+    if(FNR==1)
+      {
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/^id/)
+          {
+          col_id=i
+          }
+        }
+      }
+    if(FNR>=2)
+      {
+      id[$col_id]=$col_id
+      }
+    }
+  if(NR>FNR)
+    {
+    if(FNR==1)
+      {
+      printf "id\t"  "m/z\n" > "'$savepath'"
+      
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/ID/)
+          {
+          col_id=i
+          }
+        if($i~/m\/z/)
+          {
+          col_mz=i
+          }
+        }
+      }
+    if(FNR>=2)
+      {
+      for(i in id)
+        {
+        if(i==$col_id)
+          {
+          printf $col_id"\t"  $col_mz"\n" >> "'$savepath'"
+          }
+        }
+      }
+    }
+  }' $data1 $data2
+ 
+ ##############
+ # use xcms to catch data in EIC_metadata.tsv
+ 
+ Rscript ~/Downloads/codes/xcms.R
+ 
+ ##############
+ 
+ #plot the map 
+ 
+ datapath="/media/wizard/back/nanjing_sample/fecal/pos_mzml/EIC"
+ 
+ mkdir ${datapath}/EIC_merge
+ 
+ data1="${datapath}/../EIC_metadata.tsv"
+ 
+ data2="${datapath}/EIC*.mzML/*.tsv"
+ 
+ awk -F $'\t' '
+  {
+  if(NR==FNR)
+    {
+    if(NR>=2)
+      {
+      total_id[FNR]=$1
+      }
+    }
+  if(FILENAME~/intensity/)
+    {
+   if(FNR==1)
+     {
+     close(p_file)
+     
+     p_file=FILENAME
+     
+     n=split(FILENAME,a,"[/]||[_]")
+     
+     samplename=a[n-2]
+     
+     id=a[n-1]
+     
+     print samplename,id
+     
+     if(samplename!=p_samplename)
+       {
+       num_sample+=1
+       
+       sample[num_sample]=samplename
+       }
+     p_samplename=samplename
+     }
+   if(FNR>=1)
+     {
+     data_scan[samplename,id,FNR]=$1
+     
+     if($2!="NA")
+       {
+       data_intensity[samplename,id,FNR]=$2
+       }
+     else
+       {
+       data_intensity[samplename,id,FNR]="0"
+       }
+     }
+   }
+ if(FILENAME~/rt.tsv/)
+   {
+   if(FNR==1)
+     {
+     close(p_file)
+     
+     p_file=FILENAME
+     
+     split(FILENAME,a,"[/]||[_]")
+     
+     samplename=a[n-2]
+     }
+   if(FNR>=1)
+     {
+     data_scan[samplename,FNR]=$1
+     
+     data_rt[samplename,FNR]=$2
+     
+     max_rows[samplename]=FNR
+     }
+   }
+  }
+  END{
+    for(i in total_id)
+      {
+      printf "rt\t"  "intensity\t"  "sample\n" > "'${datapath}'/EIC_merge/" total_id[i] ".tsv"
+      
+      for(j in sample)
+        {
+        for(k=1; k<=max_rows[sample[j]]; k++)
+          {
+          printf data_rt[sample[j],k]"\t"  data_intensity[sample[j],total_id[i],k]"\t"  sample[j]"\n" \
+          \
+          >> "'${datapath}'/EIC_merge/" total_id[i] ".tsv"
+          }
+        }
+      }
+    }' $data1 $data2 
+ 
+ ######################################
+ 
+ ##  get sirius directory
+ 
+ data="/media/wizard/back/nanjing_sample/fecal/sirius_fecal_pos/results"
+ 
+ cp -r $data sirius_results
+ 
+ ######################################
+ mkdir sirius_results/EIC_rt_during
+ 
+ data1="metadata.tsv"
+ 
+ data2="fecal_pos_mzmine.tsv"
+ 
+ data3="/media/wizard/back/nanjing_sample/fecal/pos_mzml/EIC/EIC_merge/*.tsv"
+ 
+ savepath="sirius_results/EIC_rt_during/"
+ 
+ excess_time="0.2"
+ 
+ awk -F $'\t' '
+   {
+   if(NR==FNR)
+     {
+     group_name[$1]=$3
+     }
+   if(FILENAME~/mzmine/)
+     {
+     if(FNR==1)
+       {
+       p_file=FILENAME
+       
+       for(i=1; i<=NF; i++)
+         {
+         if($i~/ID/)
+           {
+           col_id=i
+           }
+         if($i~/m\/z/)
+           {
+           col_mz=i
+           }
+         if($i~/retention/)
+           {
+           col_rt=i
+           }
+         if($i~/start$/)
+           {
+           split($i,a,"[ ]")
+           
+           samplename=a[1]
+           
+           col_start[samplename]=i
+           }
+         if($i~/end$/)
+           {
+           split($i,a,"[ ]")
+           
+           samplename=a[1]
+           
+           col_end[samplename]=i
+           }
+         }
+       }
+     if(FNR>=2)
+       {
+       mz[$col_id]=$col_mz
+       
+       center_rt[$col_id]=$col_rt
+       
+       for(i in col_start)
+         {
+         if($col_start[i]!="0")
+           {
+           rt_start[$col_id,i]=$col_start[i]
+           }
+         else if(reference_sample[$col_id]=="")
+           {
+           for(j in col_start)
+             {
+             if($col_start[j]!="0")
+               {
+               rt_start[$col_id,i]=$col_start[j]
+               
+               reference_sample[$col_id]=j
+               
+               break;
+               }
+             }
+           }
+         else
+           {
+           rt_start[$col_id,i]=$col_start[reference_sample[$col_id]]
+           }
+         }
+       for(i in col_end)
+         {
+         if($col_end[i]!="0")
+           {
+           rt_end[$col_id,i]=$col_end[i]
+           }
+         else
+           {
+           rt_end[$col_id,i]=$col_end[reference_sample[$col_id]]
+           }
+         }
+       }
+     }
+   if(FILENAME~/EIC_merge/)
+     {
+     if(FNR==1)
+       {
+       close(p_file)
+       
+       p_file=FILENAME
+       
+       close("'$savepath'" p_id ".tsv")
+       
+       num_id+=1
+       
+       n=split(FILENAME,a,"[/]||[.]")
+       
+       id=a[n-1]
+       
+       p_id=id
+       
+       if(num_id==1)
+         {
+        for(i=1; i<=NF; i++)
+          {
+          if($i~/^rt/)
+            {
+            col_rt=i
+            }
+          if($i~/intensity/)
+            {
+            col_intensity=i
+            }
+          if($i~/sample/)
+            {
+            col_sample=i
+            }
+          }
+         }
+       printf $0"\t" "group\t" "label\t" "color\t" "mz\t" "center_rt\n" > "'$savepath'" id ".tsv"
+       }
+     if(FNR>=2)
+       {
+       rt_min=($col_rt)/60
+       
+       if(threshold[id,$col_sample]=="")
+         {
+         threshold[id,$col_sample]=rt_start[id,$col_sample]+(rt_end[id,$col_sample]-rt_start[id,$col_sample])*(1/2)
+         }
+       if(rt_min>=rt_start[id,$col_sample]-"'$excess_time'" && rt_min<=rt_end[id,$col_sample]+"'$excess_time'")
+         {
+         if(rt_min>=threshold[id,$col_sample] && end_sig[id,$col_sample]!="1")
+           {
+           label_sig[id,$col_sample]=1
+           
+           end_sig[id,$col_sample]=1
+           }
+         else
+           {
+           label_sig[id,$col_sample]=0
+           }
+         if(rt_min>=rt_start[id,$col_sample] && rt_min<=rt_end[id,$col_sample])
+           {
+           color[id,$col_sample]=group_name[$col_sample]
+           }
+         else
+           {
+           color[id,$col_sample]="Non feature"
+           }
+         printf sprintf("%.2f",rt_min)"\t"  $col_intensity"\t"  $col_sample"\t"  group_name[$col_sample]"\t" \
+         \
+         label_sig[id,$col_sample]"\t"  color[id,$col_sample] >> "'$savepath'" id ".tsv"
+         \
+         start_FNR[id]+=1
+         \
+         if(start_FNR[id]=="1")
+           {
+           printf "\t"sprintf("%.4f",mz[id])  "\t"sprintf("%.2f",center_rt[id]) >> "'$savepath'" id ".tsv"
+           }
+         printf "\n" >> "'$savepath'" id ".tsv"
+         }
+       }
+     }
+   }' $data1 $data2 $data3
+
+### attatch to R
+
+###.............
+
+Rscript ~/Downloads/codes/colorful_line.R
+
+###to create ms2 figure(table)
+
+datapath="/media/wizard/back/nanjing_sample/fecal/sirius_fecal_pos"
+
+data1="$datapath/temp/Mo_filename"
+
+data2="$datapath/*_*/spectrum.ms"
+
+data3=$(awk -F $'\t' '
+  {
+  if(system("test -f " $2 "/spectra/" $1 "*.tsv"))
+    {
+    printf ""
+    }
+  else
+    {
+    printf $2 "/spectra/" $1 "*.tsv "
+    }
+  }' $data1)
+
+# to   r_network/ms2_figures/<id>_<formula>.tsv
+
+mkdir sirius_results/ms2_figures
+
+savepath="sirius_results/ms2_figures/"
+
+awk -F ["\t"" "] '
+  BEGIN{
+    file_number=0
+    }
+  {
+  if(FNR==1)
+    {
+    if(FILENAME!=p_filename)
+      {
+      file_number+=1
+      }
+    if(file_number>=2)
+      {
+      close(p_filename)
+      }
+    p_filename=FILENAME
+    \
+    if((FILENAME~/spectrum.ms/))
+      {
+      step=2
+      }
+    else if((FILENAME~/spectra/))
+      {
+      step=3
+      }
+    }
+  if(NR==FNR)
+    {
+    formu[FNR]=$1
+    \
+    file[FNR]=$2
+    \
+    n=split($2,a,"[_]")
+    \
+    id[FNR]=a[n]
+    \
+    rows_data1=FNR
+    }
+  else if(step==2)
+    {
+    if(FNR==1)
+      {
+      the_id=$2
+      start=0
+      }
+    if(($1~/ms2peaks/))
+      {
+      start=FNR
+      }
+    if(start!=0)
+      {
+      n_ms2=FNR-start
+      \
+      msms[the_id,"mz",n_ms2]=$1
+      \
+      msms[the_id,"inten",n_ms2]=$2
+      \
+      if(max_n=="" || max_n<n_ms2)
+        {
+        max_n=n_ms2
+        }
+      if(max_inten[the_id]=="" || max_inten[the_id]<$2)
+        {
+        max_inten[the_id]=$2
+        }
+      } 
+    }
+  else if(step==3)
+    {
+    if(FNR==1)
+      {
+      if(step3_pro>=2)
+        {
+        close("'$savepath'"  the_id  ".tsv")
+        }
+      for(i=1; i<=rows_data1; i++)
+        {
+        if((FILENAME ~ file[i]) && (FILENAME ~ formu[i]))
+          {
+          the_id=id[i]
+          \
+          formula=formu[i]
+          \
+          break
+          }
+        else x=n+1
+        }
+      if(x==rows_data1+1)
+        {
+        nextfile
+        }
+      step3_pro+=1
+      \
+      if(step3_pro==1)
+        {
+        FS="[\t]"
+        
+        if(FNR==1)
+          {
+          for(i=1; i<=NF; i++)
+            {
+            if(($i~/mz/))
+              {
+              col_mz=i
+              }
+            if(($i~/rel/))
+              {
+              col_rel=i
+              }
+            if($i~/formula/)
+              {
+              col_formula=i
+              }
+            if($i~/ionization/)
+              {
+              col_ion=i
+              }
+            }
+          }
+        }
+      printf "mz\t"  "rel.intensity\t"  "formula\t"  "ionization\n" > "'$savepath'"  the_id  ".tsv"
+      \
+      for(j=1; j<=max_n; j++)
+        {
+        if(msms[the_id,"mz",j]!="")
+          {
+          printf msms[the_id,"mz",j]"\t" \
+          \
+          (msms[the_id,"inten",j]/max_inten[the_id])*100 "\n" >> "'$savepath'"  the_id  ".tsv"
+          }
+        }
+      }
+    if(FNR>=2)
+      {
+      norm=$col_rel*(-1)
+      \
+      printf $col_mz"\t"  norm"\t"  $col_formula"\t"  $col_ion"\n" >> "'$savepath'"  the_id  ".tsv"
+      }
+    }
+  }' $data1 $data2 $data3
+
+###########################
+#create match point
+
+mkdir sirius_results/ms2_figures_match
+
+data="sirius_results/ms2_figures/*.tsv"
+
+savepath="sirius_results/ms2_figures_match/"
+
+mz_tolerance="0.01"
+
+in_tolerance="0.1"
+
+awk -F $'\t' '
+  {
+  if(FNR==1)
+    {
+    file_num+=1
+    
+    n=split(FILENAME,a,"[/]")
+    
+    split(a[n],b,"[.]")
+    
+    id=b[1]
+    
+    if(file_num==1)
+      {
+      p_id=id
+      
+      p_file=FILENAME
+      
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/mz/)
+          {
+          col_mz=i
+          }
+        if($i~/intensity/)
+          {
+          col_intensity=i
+          }
+        if($i~/formula/)
+          {
+          col_formula=i
+          }
+        if($i~/ionization/)
+          {
+          col_ion=i
+          }
+        }
+      }
+    if(file_num>=2)
+      {
+      close(p_file)
+      
+      for(i in neg_mz)
+        {
+        for(j in pos_mz)
+          {
+          if(neg_mz[i]>=pos_mz[j]-"'$mz_tolerance'" && neg_mz[i]<=pos_mz[j]+"'$mz_tolerance'")
+            {
+            if((-1)*neg_in[i]>=pos_in[j]-"'$in_tolerance'" && (-1)*neg_in[i]<=pos_in[j]+"'$in_tolerance'")
+              {
+              match_p[i]+=1
+              
+              match_p[j]+=1
+              }
+            }
+          }
+        }
+      delete neg_mz
+      
+      delete pos_mz
+      
+      printf "mz\t"  "rel.intensity\t"  "match\t"  "formula\t"  "ionization\n" > "'$savepath'" p_id ".tsv"
+      
+      for(i=2; i<=max_FNR[p_file]; i++)
+        {
+        if(match_p[p_file,i]=="")
+         {
+         match_p[p_file,i]=0
+         }
+        printf mz[p_file,i]"\t" intensity[p_file,i]"\t" match_p[p_file,i]"\t" formula[p_file,i]"\t" ion[p_file,i]"\n" \
+        \
+        >> "'$savepath'" p_id ".tsv"
+        }
+      close("'$savepath'" p_id ".tsv")
+      
+      p_id=id
+      
+      p_file=FILENAME
+      }
+    }
+  if(FNR>=2)
+    {
+    max_FNR[FILENAME]=FNR
+    
+    mz[FILENAME,FNR]=$col_mz
+    
+    intensity[FILENAME,FNR]=$col_intensity
+    
+    formula[FILENAME,FNR]=$col_formula
+    
+    ion[FILENAME,FNR]=$col_ion
+    
+    if($col_intensity>0)
+      {
+      pos_mz[FILENAME,FNR]=$col_mz
+      
+      pos_in[FILENAME,FNR]=$col_intensity
+      }
+    else
+      {
+      neg_mz[FILENAME,FNR]=$col_mz
+      
+      neg_in[FILENAME,FNR]=$col_intensity
+      }
+    }
+  }
+  END{
+    for(i in neg_mz)
+      {
+      for(j in pos_mz)
+        {
+        if(neg_mz[i]>=pos_mz[j]-"'$mz_tolerance'" && neg_mz[i]<=pos_mz[j]+"'$mz_tolerance'")
+          {
+          if((-1)*neg_in[i]>=pos_in[j]-"'$in_tolerance'" && (-1)*neg_in[i]<=pos_in[j]+"'$in_tolerance'")
+            {
+            match_p[i]+=1
+            
+            match_p[j]+=1
+            }
+          }
+        }
+      }
+    delete neg_mz
+    
+    delete pos_mz
+    
+    printf "mz\t"  "rel.intensity\t"  "match\t"  "formula\t"  "ionization\n" > "'$savepath'" p_id ".tsv"
+    
+    for(i=2; i<=max_FNR[p_file]; i++)
+      {
+      if(match_p[p_file,i]=="")
+        {
+        match_p[p_file,i]=0
+        }
+      printf mz[p_file,i]"\t" intensity[p_file,i]"\t" match_p[p_file,i]"\t" formula[p_file,i]"\t" ion[p_file,i]"\n" \
+      \
+      >> "'$savepath'" p_id ".tsv"
+      }
+    }' $data
+
+
+
+###########################
+########Supplementary label and annonate
+
+mkdir sirius_results/ms2_figures_label
+
+data1="fecal_pos_mzmine.tsv"
+
+data2="sirius_results/fingerid_first_score.tsv"
+
+data3="sirius_results/ms2_figures_match/*.tsv"
+
+savepath="sirius_results/ms2_figures_label/"
+
+distance="10"
+
+plus="5"
+
+filter_limit="10"
+
+awk -F $'\t' '
+  BEGIN{
+    srand()
+    }
+  {
+  if(FILENAME~/mzmine/)
+    {
+    if(FNR==1)
+      {
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/ID/)
+          {
+          col_id=i
+          }
+        if($i~/retention/)
+          {
+          col_rt=i
+          }
+        if($i~/m\/z/)
+          {
+          col_mz=i
+          }
+        }
+      p_file=FILENAME
+      }
+    if(FNR>=2)
+      {
+      precursor[$col_id]=$col_mz
+      
+      rt[$col_id]=$col_rt
+      }
+    }
+  if(FILENAME~/fingerid/)
+    {
+    if(FNR==1)
+      {
+      for(i=1; i<=NF; i++)
+        {
+        if($i~/^id/)
+          {
+          col_id=i
+          }
+        if($i~/similarity/)
+          {
+          col_similarity=i
+          }
+        }
+      p_file=FILENAME
+      }
+    if(FNR>=2)
+      {
+      similarity[$col_id]=$col_similarity
+      }
+    }
+  if(FILENAME~/ms2_figures/)
+    {
+   if(FNR==1)
+     {
+     close(p_file)
+     
+     file_num+=1
+     
+     p_file=FILENAME
+     
+     n=split(FILENAME,a,"[/]")
+     
+     split(a[n],b,"[.]")
+     
+     id=b[1]
+     
+     printf $0"\t"  "y_label\t" "precursor m/z\t" "RT (min)\t" "similarity\n" \
+     \
+     > "'$savepath'"a[n]
+     
+     if(file_num==1)
+       {
+       for(i=1; i<=NF; i++)
+         {
+         if($i~/mz/)
+           {
+           col_mz=i
+           }
+         if($i~/intensity/)
+           {
+           col_intensity=i
+           }
+         if($i~/match/)
+           {
+           col_match=i
+           }
+         }
+       }
+     }
+   if(FNR>=2)
+     {
+     if(FNR>=3)
+        {
+        if($col_match!=1 && $col_intensity<"'$filter_limit'")
+          {
+          next;
+          }
+        }
+     printf $0"\t" >> "'$savepath'"a[n]
+     
+     mz[FNR]=$col_mz
+     
+     intensity[FNR]=$col_intensity
+     
+     printf "NA" >> "'$savepath'"a[n]
+     
+     if(FNR==2)
+       {
+       printf "\t"sprintf("%.4f",precursor[id])"\t"  sprintf("%.2f",rt[id])"\t" sprintf("%.2f",similarity[id]) \
+       \
+       >> "'$savepath'"a[n]
+       }
+     
+     printf "\n" >> "'$savepath'"a[n]
+     }
+    }
+  }' $data1 $data2 $data3
+
+ ### structure
+
+ mkdir sirius_results/structure_2d
+ 
+ conda activate my-rdkit-env
+ 
+ savepath="sirius_results/structure_2d"
+ 
+ cd $savepath
+ 
+ echo "escape" > escape.tsv
+ 
+ data="../fingerid_first_score.tsv"
+ 
+ awk -F $'\t' '
+   {
+   if(FNR==1)
+     {
+     for(i=1; i<=NF; i++)
+       {
+       if($i~/^id/)
+         {
+         col_id=i
+         }
+       if($i~/smiles/)
+         {
+         col_smiles=i
+         }
+       }
+     }
+   if(FNR>=2)
+     {
+     printf $col_id "_" $col_smiles "|||"
+     }
+   }' $data > list
+ 
+ python_script="/home/wizard/Downloads/codes/python_files/draw_structure.py"
+ 
+ python $python_script list
+
+ cd ../..
+
+
+

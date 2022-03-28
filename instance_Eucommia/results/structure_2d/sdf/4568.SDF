@@ -1,0 +1,237 @@
+ 
+  -OEChem-10192104242D
+
+ 54 56  0     1  0  0  0  0  0999 V2000
+    7.1752    2.7300    0.0000 S   0  0  0  0  0  0  0  0  0  0  0  0
+    8.9073   -0.2699    0.0000 S   0  0  0  0  0  0  0  0  0  0  0  0
+    4.3497    3.3937    0.0000 S   0  0  0  0  0  0  0  0  0  0  0  0
+    2.5896    0.3452    0.0000 S   0  0  0  0  0  0  0  0  0  0  0  0
+    3.4557   -0.3851    0.0000 S   0  0  0  0  0  0  0  0  0  0  0  0
+    5.2158   -3.4336    0.0000 S   0  0  0  0  0  0  0  0  0  0  0  0
+    5.4432    1.7300    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    5.4432   -0.2699    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    7.1752    3.7300    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    9.7733   -0.7699    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    8.1752    2.7300    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    6.1752    2.7300    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    8.4073   -1.1360    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    9.4073    0.5961    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7111    1.7300    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5771   -1.7700    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5771    1.2300    0.0000 C   0  0  3  0  0  0  0  0  0  0  0  0
+    6.3092    1.2300    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    5.4432   -1.2700    0.0000 C   0  0  3  0  0  0  0  0  0  0  0  0
+    6.3092    0.2301    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    7.1752    1.7300    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    8.0412    0.2301    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    7.1752   -0.2699    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    8.0412    1.2300    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5771    0.2301    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    6.3092   -1.7700    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.6066    2.7246    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.7976    1.3233    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.6636   -1.3632    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    4.4726   -2.7645    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.6284    2.9325    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.1284    2.0665    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.9945   -2.1064    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.4945   -2.9724    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    5.1141    0.9201    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.9801   -0.9599    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    7.1752   -0.8899    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    8.5782    1.5400    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.9571    0.2301    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5771   -0.3899    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.1971    0.2301    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.9992   -2.3069    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.8461   -2.0800    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.6192   -1.2330    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.3763    3.4989    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.5118    2.0016    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.3779   -2.0416    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.2423   -3.5388    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    7.7122    4.0400    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.2208    4.0002    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0000    0.1536    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660   -0.1935    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.0868   -4.0400    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+   10.3102   -0.4599    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+  1  9  1  0  0  0  0
+  1 11  2  0  0  0  0
+  1 12  2  0  0  0  0
+  1 21  1  0  0  0  0
+  2 10  1  0  0  0  0
+  2 13  2  0  0  0  0
+  2 14  2  0  0  0  0
+  2 22  1  0  0  0  0
+  3 27  1  0  0  0  0
+  3 50  1  0  0  0  0
+  4 28  1  0  0  0  0
+  4 51  1  0  0  0  0
+  5 29  1  0  0  0  0
+  5 52  1  0  0  0  0
+  6 30  1  0  0  0  0
+  6 53  1  0  0  0  0
+  7 17  1  0  0  0  0
+  7 18  1  0  0  0  0
+  8 19  1  0  0  0  0
+  8 20  1  0  0  0  0
+  9 49  1  0  0  0  0
+ 10 54  1  0  0  0  0
+ 15 17  1  0  0  0  0
+ 15 27  1  0  0  0  0
+ 15 28  1  0  0  0  0
+ 16 19  1  0  0  0  0
+ 16 29  1  0  0  0  0
+ 16 30  1  0  0  0  0
+ 17 25  1  0  0  0  0
+ 17 35  1  0  0  0  0
+ 18 20  2  0  0  0  0
+ 18 21  1  0  0  0  0
+ 19 26  1  0  0  0  0
+ 19 36  1  0  0  0  0
+ 20 23  1  0  0  0  0
+ 21 24  2  0  0  0  0
+ 22 23  2  0  0  0  0
+ 22 24  1  0  0  0  0
+ 23 37  1  0  0  0  0
+ 24 38  1  0  0  0  0
+ 25 39  1  0  0  0  0
+ 25 40  1  0  0  0  0
+ 25 41  1  0  0  0  0
+ 26 42  1  0  0  0  0
+ 26 43  1  0  0  0  0
+ 26 44  1  0  0  0  0
+ 27 31  2  0  0  0  0
+ 28 32  2  0  0  0  0
+ 29 33  2  0  0  0  0
+ 30 34  2  0  0  0  0
+ 31 32  1  0  0  0  0
+ 31 45  1  0  0  0  0
+ 32 46  1  0  0  0  0
+ 33 34  1  0  0  0  0
+ 33 47  1  0  0  0  0
+ 34 48  1  0  0  0  0
+M  END
+> <PUBCHEM_COMPOUND_CID>
+89098658
+
+> <PUBCHEM_COMPOUND_CANONICALIZED>
+1
+
+> <PUBCHEM_CACTVS_COMPLEXITY>
+892
+
+> <PUBCHEM_CACTVS_HBOND_ACCEPTOR>
+12
+
+> <PUBCHEM_CACTVS_HBOND_DONOR>
+6
+
+> <PUBCHEM_CACTVS_ROTATABLE_BOND>
+8
+
+> <PUBCHEM_CACTVS_SUBSKEYS>
+AAADceB7PABwAAAAAAAAAAAAAAAAAWLAAAAwAAAAAAAAAAAB8AAAHgQACAAACATh0gYyh5MMFIagACBiRHHC2GAhIiAI2Do+7JgNJuLEsZuOOCrkwBHK6AeAQAAAAIAABEAAYAABAAAIgADAAAAAAAAAAA==
+
+> <PUBCHEM_IUPAC_OPENEYE_NAME>
+4,5-bis[1-[2,5-bis(sulfanyl)pyrrol-1-yl]ethoxy]benzene-1,3-disulfonic acid
+
+> <PUBCHEM_IUPAC_CAS_NAME>
+4,5-bis[1-(2,5-dimercapto-1-pyrrolyl)ethoxy]benzene-1,3-disulfonic acid
+
+> <PUBCHEM_IUPAC_NAME_MARKUP>
+4,5-bis[1-[2,5-bis(sulfanyl)pyrrol-1-yl]ethoxy]benzene-1,3-disulfonic acid
+
+> <PUBCHEM_IUPAC_NAME>
+4,5-bis[1-[2,5-bis(sulfanyl)pyrrol-1-yl]ethoxy]benzene-1,3-disulfonic acid
+
+> <PUBCHEM_IUPAC_SYSTEMATIC_NAME>
+4,5-bis[1-[2,5-bis(sulfanyl)pyrrol-1-yl]ethoxy]benzene-1,3-disulfonic acid
+
+> <PUBCHEM_IUPAC_TRADITIONAL_NAME>
+4,5-bis[1-(2,5-dimercaptopyrrol-1-yl)ethoxy]benzene-1,3-disulfonic acid
+
+> <PUBCHEM_IUPAC_INCHI>
+InChI=1S/C18H20N2O8S6/c1-9(19-14(29)3-4-15(19)30)27-12-7-11(33(21,22)23)8-13(34(24,25)26)18(12)28-10(2)20-16(31)5-6-17(20)32/h3-10,29-32H,1-2H3,(H,21,22,23)(H,24,25,26)
+
+> <PUBCHEM_IUPAC_INCHIKEY>
+BFBCHWDYEBHLNH-UHFFFAOYSA-N
+
+> <PUBCHEM_XLOGP3_AA>
+3
+
+> <PUBCHEM_EXACT_MASS>
+583.95439264
+
+> <PUBCHEM_MOLECULAR_FORMULA>
+C18H20N2O8S6
+
+> <PUBCHEM_MOLECULAR_WEIGHT>
+584.8
+
+> <PUBCHEM_OPENEYE_CAN_SMILES>
+CC(N1C(=CC=C1S)S)OC2=C(C(=CC(=C2)S(=O)(=O)O)S(=O)(=O)O)OC(C)N3C(=CC=C3S)S
+
+> <PUBCHEM_OPENEYE_ISO_SMILES>
+CC(N1C(=CC=C1S)S)OC2=C(C(=CC(=C2)S(=O)(=O)O)S(=O)(=O)O)OC(C)N3C(=CC=C3S)S
+
+> <PUBCHEM_CACTVS_TPSA>
+158
+
+> <PUBCHEM_MONOISOTOPIC_WEIGHT>
+583.95439264
+
+> <PUBCHEM_TOTAL_CHARGE>
+0
+
+> <PUBCHEM_HEAVY_ATOM_COUNT>
+34
+
+> <PUBCHEM_ATOM_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ATOM_UDEF_STEREO_COUNT>
+2
+
+> <PUBCHEM_BOND_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_BOND_UDEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ISOTOPIC_ATOM_COUNT>
+0
+
+> <PUBCHEM_COMPONENT_COUNT>
+1
+
+> <PUBCHEM_CACTVS_TAUTO_COUNT>
+-1
+
+> <PUBCHEM_COORDINATE_TYPE>
+1
+5
+255
+
+> <PUBCHEM_BONDANNOTATIONS>
+15  27  8
+15  28  8
+16  29  8
+16  30  8
+17  25  3
+18  20  8
+18  21  8
+19  26  3
+20  23  8
+21  24  8
+22  23  8
+22  24  8
+27  31  8
+28  32  8
+29  33  8
+30  34  8
+31  32  8
+33  34  8
+
+$$$$

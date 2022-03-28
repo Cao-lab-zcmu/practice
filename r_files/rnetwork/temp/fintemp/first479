@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+GLKHKUPLTXFSQT	InChI=1S/C11H22N2S/c1-3-13(4-2)11(14)12-10-8-6-5-7-9-10/h10H,3-9H2,1-2H3,(H,12,14)	C11H22N2S	1	-115.65170798501183	3-cyclohexyl-1,1-diethylthiourea	CCN(CC)C(=S)NC1CCCCC1	2.70000005	20850304,21722674	PubChem:(727203); ZINC bio:(ZINC00136174); SuperNatural:(SN00117376); COCONUT:(CNP0321450); PubMed:(null)	0.4802249329545363	3153986	479	469_PL20210630_479

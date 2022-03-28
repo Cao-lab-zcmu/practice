@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+DCHPWNOJPJRSEA	InChI=1S/C9H8O2/c10-6-2-4-8-3-1-5-9(11)7-8/h1-7,11H	C9H8O2	1	-56.62350066135441	Cinnamaldehyde deriv. IIb	C1=CC(=CC(=C1)O)C=CC=O	1.64881444	10969976,17150488	PubChem:(6538957, 53752745, 131403772); HMDB:(135274); ZINC bio:(ZINC13547091); YMDB Mine:(null); PubChem class - bio and metabolites:(null); PubMed:(null); KEGG Mine:(null)	0.5097284076028248	42966458442	1052	1021_PL20210630_1052

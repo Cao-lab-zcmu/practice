@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+QHVRTRGSAJGAQA	InChI=1S/C9H18N2S/c1-11(2)9(12)10-8-6-4-3-5-7-8/h8H,3-7H2,1-2H3,(H,10,12)	C9H18N2S	1	-128.04004978246675	3-cyclohexyl-1,1-dimethylthiourea	CN(C)C(=S)NC1CCCCC1	2.0	20850304,21722674	PubChem:(708395); PubMed:(null)	0.35434219969267583	66	276	273_PL20210630_276

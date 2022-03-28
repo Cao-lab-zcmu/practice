@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+XAWKNALRUSOTOY	InChI=1S/C8H12N2/c1-3-4-8-7(2)9-5-6-10-8/h5-6H,3-4H2,1-2H3	C8H12N2	1	-44.86765078488426	2-methyl-3-propylpyrazin	CCCC1=NC=CN=C1C	2.02715182	11495591	PubChem:(85224); HMDB:(41252); NORMAN:(NS00053277); COCONUT:(CNP0076160); PubChem class - food:(null); additional:(null); PubChem class - bio and metabolites:(null); PubChem class - safety and toxic:(null); Training Set:(null); PubMed:(null)	0.5090355592469448	221003850	1205	1172_PL20210630_1205

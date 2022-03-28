@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+NXFQWRWXEYTOTK	InChI=1S/C5H8N4O/c1-3-7-4(6)9-5(8-3)10-2/h1-2H3,(H2,6,7,8,9)	C5H8N4O	1	-114.87326449120155	Oprea1_823704	CC1=NC(=NC(=N1)OC)N	0.300000012	11990367,15969517,18665986	PubChem:(15466); MeSH:(15466); CHEBI:(83511); NORMAN:(NS00000055); additional:(null); PubChem class - safety and toxic:(null); Training Set:(null); PubMed:(null); KEGG Mine:(null)	0.28724157007651074	8657846374	1339	1303_PL20210630_1339

@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+VMFXYTSKMWPHQH	InChI=1S/C22H43NO/c1-2-3-4-5-6-7-8-9-10-11-12-13-17-20-23-22(24)21-18-15-14-16-19-21/h21H,2-20H2,1H3,(H,23,24)	C22H43NO	1	-58.78334563999369	N-Pentadecylcyclohexanecarboxamide	CCCCCCCCCCCCCCCNC(=O)C1CCCCC1	8.80000019	14686878,15910884,16078824,16154384,20022504,22542283	PubChem:(44398718); MeSH:(44398718); COCONUT:(CNP0348534); additional:(null); Training Set:(null); PubMed:(null)	0.5771932532952069	2637894	731	709_PL20210630_731

@@ -1,0 +1,82 @@
+##########################
+##########################
+#path=
+mkdir results
+mkdir temp
+mkdir temp/fintemp
+ls -l | awk '/^d/ {print $NF}' > temp/namelist; \
+for filename in $(cat temp/namelist)
+do
+id=$(echo $filename | awk -F _ '{print $NF}');
+cat $filename/fingerid/*.tsv | sort -t $'\t' -n -k 5 -r | uniq | sed 's/\r//g' | awk -F $'\t' -v OFS=$'\t' '{if(NR==1){print $0,"id","filename"};if(NR>=2){print $0,"'$id'","'$filename'"}}' > temp/fintemp/sum$id
+sed -n '1p;2p' temp/fintemp/sum$id > temp/fintemp/first$id
+done;
+cat temp/fintemp/first* | sort -t $'\t' -n -k 5 -r | uniq > results/finfirst_set.tsv
+###################################
+###################################
+mkdir temp/canotemp;
+awk -F $'\t' -v OFS=$'\t' '{if(NR>=2){print $3,$14}}' results/finfirst_set.tsv > temp/Mo_filename;
+awk -F $'\t' '{if(NR>=2){print $1}}' canopus.tsv > temp/canotemp/pos_canoindex;
+pos_cano_title=$(awk -F $'\t' '{if(NR>=2){print $}}' canopus.tsv | paste -s)
+awk -F $'\t' '{if(NR>=2){print $1}}' canopus_neg.tsv > temp/canotemp/neg_canoindex;
+neg_cano_title=$(awk -F $'\t' '{if(NR>=2){print $}}' canopus_neg.tsv | paste -s)
+list="temp/Mo_filename";
+IFS_def=$IFS; \
+IFS=$'\n'; \
+rm temp/canotemp/allpos
+rm temp/canotemp/allneg
+for sumname in $(cat $list)
+do
+moname=$(echo $sumname | awk -F $'\t' '{print $1}'); \
+filename=$(echo $sumname | awk -F $'\t' '{print $2}'); \
+id=$(echo $filename | awk -F _ '{print $NF}');
+  if [ $id -gt 0 ]
+  then paste -s temp/canotemp/pos_canoindex $filename/canopus/$moname*.fpt | sed 's/\r//g' | awk -F $'\t' -v OFS=$'\t' '{if(NR==1){print $0,"id"};if(NR>=2){print $0,"'$id'"}}' >> temp/canotemp/allpos
+  else paste -s temp/canotemp/neg_canoindex $filename/canopus/$moname*.fpt | sed 's/\r//g' | awk -F $'\t' -v OFS=$'\t' '{if(NR==1){print $0,"id"};if(NR>=2){print $0,"'$id'"}}' >> temp/canotemp/allneg
+  fi
+done; \
+IFS=$IFS_def; \
+cat <(echo $pos_cano_title) <(sort temp/canotemp/allpos | uniq | sed '1d') > results/pos_all_cano_pp.tsv;
+cat <(echo $neg_cano_title) <(sort temp/canotemp/allneg | uniq | sed '1d') > results/neg_all_cano_pp.tsv;
+rm temp/canotemp/trans*
+a=$(awk -F $'\t' -v OFS=$'\t' '{print NF}' results/pos_all_cano_pp.tsv)
+for ((i=1;i<=a;i++))
+do
+awk -F $'\t' -v OFS=$'\t' '{print $'$i'}' results/pos_all_cano_pp.tsv | paste -s >> temp/canotemp/trans_pos_all_cano_pp.tsv
+done;
+a=$(awk -F $'\t' -v OFS=$'\t' '{print NF}' results/neg_all_cano_pp.tsv)
+for ((i=1;i<=a;i++))
+do
+awk -F $'\t' -v OFS=$'\t' '{print $'$i'}' results/neg_all_cano_pp.tsv | paste -s >> temp/canotemp/trans_neg_all_cano_pp.tsv
+done;
+join -a1 -a2 -t $'\t' <(sort temp/canotemp/trans_pos_all_cano_pp.tsv) <(sort temp/canotemp/trans_neg_all_cano_pp.tsv) > temp/canotemp/trans_all_cano_pp.tsv
+a=$(awk -F $'\t' -v OFS=$'\t' '{print NF}' temp/canotemp/trans_all_cano_pp.tsv)
+rm results/all_cano_pp.tsv
+for ((i=1;i<=a;i++))
+do
+awk -F $'\t' -v OFS=$'\t' '{print $'$i'}' temp/canotemp/trans_all_cano_pp.tsv | paste -s >> results/all_cano_pp.tsv
+done;
+####################################
+####################################
+awk -F $'\t' -v OFS=$'\t' '{if(NR>=2){print $4}}' | sort -k 1 | uniq > results/spe_class.tsv
+awk -F $'\t' -v OFS=$'\t' '{if(NR>=2){print $}}' | sort -k 1 | uniq > results/super_class.tsv
+#########################
+index="results/super_class.tsv"
+awk '{if(NR==1){print}}' results/all_cano_pp.tsv | sed 's/\t/\n/g' > temp/canotemp/searchindex;
+#########################
+IFS_def=$IFS; \
+IFS=$'\n'; \
+rm temp/canotemp/line_n
+for line_n in $(cat $index)
+do
+grep -F -i -n "$line_n" temp/canotemp/pos_searchindex >> temp/canotemp/line_n
+done; \
+IFS=$IFS_def;
+awknum=$(awk -F : -v OFS=$'\t' '{print $1}' temp/canotemp/line_n | sort -n)
+for numline in $(echo $awknum)
+awk -F $'\t' -v OFS=$'\t' '{print $'$numline'}' results/all_cano_pp.tsv > temp/canotemp/awk$numline
+done;
+paste temp/canotemp/awk* <(awk -F $'\t' '{print $NF}' results/all_cano_pp.tsv) > results/select_cano_pp.tsv
+###################################
+###################################
+

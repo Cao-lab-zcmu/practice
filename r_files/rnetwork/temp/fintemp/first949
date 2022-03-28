@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+WKSQMKBWJAFJQR	InChI=1S/C8H6O2/c1-2-6-3-4-7(9)8(10)5-6/h1,3-5,9-10H	C8H6O2	1	-64.90231885466622	4-Ethynyl-1,2-Benzenediol	C#CC1=CC(=C(C=C1)O)O	1.43864775		PubChem:(22603778); EcoCyc Mine:(null); KEGG Mine:(null)	0.517699205105559	25769803778	949	919_PL20210630_949

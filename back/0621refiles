@@ -1,0 +1,330 @@
+##########################
+##########################
+echo "We are all in the gutter, 
+but some of us are looking at the stars."; \
+select command in "default" "stucture_extract" "classification_extract_sum" "classification_extract_select" "fragment_tree_network" "fragment_tree_network_delta" "double_ion_network"
+do
+	default="stucture_extract classification_extract_sum classification_extract_select fragment_tree_network fragment_tree_network_delta double_ion_network"
+	if [[ $command == "default" ]]
+	then
+	confirm=0
+	 	until [[ $confirm == "yes" ]] || [[ $confirm == "no" ]]
+	 	do
+	 	read -p "Running all proccesses sequentially? [yes/no] >>>" confirm
+	 	done;
+	 	if [[ $confirm == "no" ]]
+	 	then exit
+	 	fi;\
+	list=$( echo $default );\
+	else list=$( echo $command )
+	fi;\
+for option in $(echo $list)
+do
+case $option in
+structure_extract)
+echo "This script handlesg items that contain both positive and negative ion modes of sirius by default. Even if the project contains only a single ion mode, some of the modules are still working fine. However, before running it, you need to make sure that you have corrected the ID of the negative ion mode to a negative number, otherwise it will cause an incorrect output result."
+standard="yes";\
+check=0
+	until [[ $check == $standard ]]
+	do
+	read -p "You have reformated the ID. [yes]>>>" check;
+	done;
+projectpath=0
+	until [ -d $projectpath ] && [ -f $projectpath/canopus_summary.tsv ] 
+	do
+	read -p "Please input the path of the sirius project >>>" projectpath; \
+	done; \
+cd $projectpath; \
+mkdir results; \
+mkdir temp; \
+mkdir temp/fintemp; \
+ls -l | awk '/^d/ {print $NF}' > temp/namelist; \
+echo "The temporary directory and the output directory have been successfully created."; \
+echo "Running extracting the identification results of CSI:Finger."; \
+for filename in $(cat temp/namelist)
+do
+id=$(echo $filename | awk -F _ '{print $NF}');
+cat $filename/fingerid/*.tsv | sort -t $'\t' -n -k 5 -r | uniq | sed 's/\r//g' | awk -F $'\t' -v OFS=$'\t' '{if(NR==1){print $0,"id","filename"};if(NR>=2){print $0,"'$id'","'$filename'"}}' > temp/fintemp/sum$id;
+sed -n '1p;2p' temp/fintemp/sum$id > temp/fintemp/first$id;
+done;
+cat temp/fintemp/first* | sort -t $'\t' -n -k 5 -r | uniq > results/finfirst_set.tsv; \
+echo "CSI:Finger's identification results have been successfully assembled into <results/finfirst_set.tsv>";\
+;;
+###################################
+###################################
+###################################
+###################################
+classification_extract_sum)
+echo "Running the consolidation of CANOPUS results."; \
+mkdir temp/canotemp; \
+awk -F $'\t' -v OFS=$'\t' '{if(NR>=2){print $3,$14}}' results/finfirst_set.tsv > temp/Mo_filename; \
+awk -F $'\t' '{if(NR>=2){print $1}}' canopus.tsv > temp/canotemp/pos_canoindex; \
+pos_cano_title=$(awk -F $'\t' -v OFS=$'\t' '{if(NR>=2){print $4}}' canopus.tsv | paste -s); \
+awk -F $'\t' '{if(NR>=2){print $1}}' canopus_neg.tsv > temp/canotemp/neg_canoindex; \
+neg_cano_title=$(awk -F $'\t' -v OFS=$'\t' '{if(NR>=2){print $4}}' canopus_neg.tsv | paste -s); \
+list="temp/Mo_filename"; \
+echo "Note that here the CANOPUS output is extracted by the highest ranking of the structure identification results. Based on <temp/Mo_filename>."
+IFS_def=$IFS; \
+IFS=$'\n'; \
+echo "Clear generated files."; \
+if [ -f temp/canotemp/allpos ] || [ -f temp/canotemp/allneg ]
+then
+rm temp/canotemp/all*; \
+fi
+echo "CANOPUS files being extracted..."
+for sumname in $(cat $list)
+do
+moname=$(echo $sumname | awk -F $'\t' '{print $1}'); \
+filename=$(echo $sumname | awk -F $'\t' '{print $2}'); \
+id=$(echo $filename | awk -F _ '{print $NF}');
+	if [[ "$id" > "0" ]]
+	then canoindex=pos_canoindex; ion=pos
+	else canoindex=neg_canoindex; ion=neg
+	fi
+paste -s temp/canotemp/$canoindex $filename/canopus/$moname*.fpt | sed 's/\r//g' | awk -F $'\t' -v OFS=$'\t' '{if(NR==1){print $0,"id"};if(NR>=2){print $0,"'$id'"}}' >> temp/canotemp/all$ion
+done; \
+IFS=$IFS_def; \
+echo "CANOPUS files have extracted successfully."
+###############################################
+echo "Reformat the output files. This will take some time..."; \
+if [ -f temp/canotemp/trans* ]
+then
+rm temp/canotemp/trans*
+fi; \
+for ion in $(echo "pos neg")
+do
+cat <(echo ""$ion"_cano_title") <(sort temp/canotemp/all$ion | uniq | sed '1d') > results/"$ion"_all_cano_pp.tsv;
+a=$(awk -F $'\t' -v OFS=$'\t' '{print NF}' results/"$ion"_all_cano_pp.tsv); \
+	for ((i=1;i<=a;i++))
+	do
+	awk -F $'\t' -v OFS=$'\t' '{print $'$i'}' results/"$ion"_all_cano_pp.tsv | paste -s >> temp/canotemp/trans_"$ion"_all_cano_pp.tsv
+	echo "The file of ion type of "$ion" has been successfully transformated. "
+	done;
+done;
+echo "Merge the files of neg and pos."
+join -a1 -a2 -t $'\t' <(sort temp/canotemp/trans_pos_all_cano_pp.tsv) <(sort temp/canotemp/trans_neg_all_cano_pp.tsv) > temp/canotemp/trans_all_cano_pp.tsv; \
+a=$(awk -F $'\t' -v OFS=$'\t' '{print NF}' temp/canotemp/trans_all_cano_pp.tsv)
+	if [ -f results/all_cano_pp.tsv ]
+	then
+	rm results/all_cano_pp.tsv
+	fi;
+echo "Transformate the merged files..."
+	for ((i=1;i<=a;i++))
+	do
+	awk -F $'\t' -v OFS=$'\t' '{print $'$i'}' temp/canotemp/trans_all_cano_pp.tsv | paste -s >> results/all_cano_pp.tsv
+	done;
+echo "All posterior probability of classifications have been successfully writen into <results/all_cano_pp.tsv>."
+;;
+###################################
+###################################
+###################################
+###################################
+classification_extract_select)
+awk -F $'\t' -v OFS=$'\t' '{if(NR>=2){print $4}}' canopus_summary.tsv | sort -k 1 | uniq > results/spe_class.tsv;\
+awk -F $'\t' -v OFS=$'\t' '{if(NR>=2){print $8 }}' canopus_summary.tsv | sort -k 1 | uniq > results/super_class.tsv;\
+#########################
+echo "In order to filter out unnecessary categories, it is necessary to filter by the given list. Two lists are provided by default (depend on your idenfication results), but you can also customize this list by simply including keywords.";\
+inputlist=0; \
+	until [[ $inputlist == "most specific class" ]] || [[ $inputlist == "superclass" ]] || [[ $inputlist == "customlist" ]]
+	do
+	read -p "Please select the desired list. >>>" inputlist;
+	done;\
+	if [[ $inputlist == "most specific class" ]];
+	then index="results/spe_class.tsv"
+	elif [[ $inputlist == "superclass" ]];
+	then index="results/super_class.tsv"
+	elif [[ $inputlist == "customlist" ]];
+	then index=$(echo $listpath)
+	else echo "error";
+	fi;\
+	until [ -f "$listpath" ]
+	do
+	read -p "Please enter the path of the custom list >>>" listpath
+	done;\
+awk '{if(NR==1){print}}' results/all_cano_pp.tsv | sed 's/\t/\n/g' > temp/canotemp/searchindex;
+#########################
+	if [-f temp/canotemp/line_n ]
+	then rm temp/canotemp/line_n
+	fi;\
+IFS_def=$IFS; \
+IFS=$'\n'; \
+	for line_n in $(cat $index)
+	do
+	grep -F -i -n "$line_n" temp/canotemp/pos_searchindex >> temp/canotemp/line_n
+	done; \
+IFS=$IFS_def;
+awknum=$(awk -F : -v OFS=$'\t' '{print $1}' temp/canotemp/line_n | sort -n)
+	for numline in $(echo $awknum)
+	awk -F $'\t' -v OFS=$'\t' '{print $'$numline'}' results/all_cano_pp.tsv > temp/canotemp/awk$numline
+	done;
+paste temp/canotemp/awk* <(awk -F $'\t' '{print $NF}' results/all_cano_pp.tsv) > results/select_cano_pp.tsv
+echo "CANOPUS results specified have been successfully written into <results/select_cano_pp.tsv>"
+;;
+###################################
+###################################
+###################################
+###################################
+fragment_tree_network)
+echo "The following steps attempt to build a molecular network with the results of the fragment tree alignment similarity calculations of SIRIUS 4. If there are two ion patterns in the input project, the module will filter to calculate (normalize) the aligned similarity between features of the same ion pattern, and will not screen for aligned similarity between different ions, as this would cause erroneous results."
+echo "Make sure that you have calculated the alignment similarity between features using the standalone tool in the command line version of sirius 4 and saved it in sirius project."
+check=0
+	until [[ $check == "yes" ]]
+	do
+	read -p "Please enter:yes >>>" check;
+	done;
+echo "Please enter the minimum alignment similarity that you want to filter."
+tlimit=0
+	until [[ "$tlimit" > "0.3" ]] && [[ "$tlimit" < "0.9" ]]
+	do
+	read -p "0.4-0.7 is recommended >>>" tlimit;
+	done;
+mkdir temp/ftaligntemp
+a=$(awk 'END{print NF}' ftalign.tsv); \
+awk -F $'\t' -v OFS=$'\t' '{print $1}' ftalign.tsv | awk -F _ -v OFS=$'\t' '{print $NF}' > temp/ftaligntemp/id; \
+paste temp/ftaligntemp/id <(cut -d $'\t' -f 2- ftalign.tsv) | sed '1d' > temp/ftaligntemp/fta; \
+	if [ -f temp/ftaligntemp/net_$tlimit ]
+	rm temp/ftaligntemp/net_$tlimit
+	fi;\
+echo "Start calculating, filtering and reformatting the fragment tree relative similarity scores. This may take a long time."
+	for (( i=2; i <= a; i++))
+	do
+	n=$((i-1))
+	p1=$(awk '{if(NR=='$n'){print $'$i'}}' temp/ftaligntemp/fta)
+	target=$(awk -F $'\t' -v OFS=$'\t' '{if(NR=='$i'){print}}' temp/ftaligntemp/id)
+	awk -F $'\t' -v OFS=$'\t' '{for(x=2; x<=NF ;x++){y=x-1;p2=$x;norm_o=$'$i';norm1=norm_o/'$p1';norm2=norm_o/p2;norms=(norm1+norm2)/2;if(NR==y){print $1,"'$target'",norms}}}' temp/ftaligntemp/fta | awk -F $'\t' -v OFS=$'\t' '$1>=0 && $2>=0 || $1<=0 && $2<=0 {print}' | awk -F $'\t' -v OFS=$'\t' ' $3>='$tlimit' && $3<=0.999 {print}' >> temp/ftaligntemp/net_$tlimit;
+	echo "The results of feature name of $target has writen into <temp/ftaligntemp/net_$tlimit>."
+	done; \
+echo "Filter the repetation..."
+a=$(awk 'END{print NR}' temp/ftaligntemp/net_$tlimit);
+rm temp/ftaligntemp/re_net_$tlimit
+	for (( i=1; i <= a; i++ ))
+	do
+	awk -F $'\t' -v OFS=$'\t' '{if(NR=='$i'){if($1>$2){print $1,$2,$3}else{print $2,$1,$3}}}' temp/ftaligntemp/net_$tlimit >> temp/ftaligntemp/re_net_$tlimit
+	done; \
+sort temp/ftaligntemp/re_net_$tlimit | uniq > temp/ftaligntemp/filter_net_$tlimit;
+;;
+###################################
+###################################
+###################################
+###################################
+fragment_tree_network_delta)
+awk -F $'\t' -v OFS=$'\t' '{if(NR>=2){print $2,$3}}' csi_fingerid.tsv > temp/ftaligntemp/pos_fingerprint_index;
+awk -F $'\t' -v OFS=$'\t' '{if(NR>=2){print $2,$3}}' csi_fingerid_neg.tsv > temp/ftaligntemp/neg_fingerprint_index;
+echo "The following module attempts to compute the differential fingerprints of connected clusters based on the molecular fingerprint results of sirius 4."
+plimit=0
+	until [[ "$plimit" > "0.5" ]] && [[ "$plimit" < "0.99" ]]
+	do
+	read -p "Please enter the minimum posterior probability of the molecular fingerprint to be filtered. 0.9-0.99 is recommended. >>>"
+	done;
+a=$(awk 'END{print NR}' temp/ftaligntemp/filter_net_$tlimit)
+	if [ -f temp/ftaligntemp/refilter_net_$tlimit ]
+	then rm temp/ftaligntemp/refilter_net_$tlimit
+	fi;\
+	echo "Running delta_fingerprint computation..."
+	for (( i=1; i <= a; i++))
+	do
+	source=$(awk '{if(NR=='$i'){print $1}}' temp/ftaligntemp/filter_net_$tlimit)
+	sourceion=$(cat _$source/compound.info | grep ionMass | awk '{print $2}')
+	target=$(awk '{if(NR=='$i'){print $2}}')
+	targetion=$(cat _$target/compound.info | grep ionMass | awk '{print $2}')
+	deltaion=$(($sourceion-$targetion))
+	 	if [[ "$source" > "0" ]]
+	 	then
+	 	printindex=pos_fingerprint_index
+	 	else
+	 	printindex=neg_fingerprint_index
+	 	fi;
+	source_moname=$(grep _$source | awk -F $'\t' -v OFS=$'\t' '{print $1}')
+	sourcefp=$(pasete temp/ftaligntemp/$printindex _$source/fingerprints/$source_moname* | awk -F $'\t' -v OFS=$'\t' '$3>='$plimit'{print $1}')
+	target_moname=$(grep _$target | awk -F $'\t' -v OFS=$'\t' '{print $1}')
+	targetfp=$(pasete temp/ftaligntemp/$printindex _$target/fingerprints/$target_moname* | awk -F $'\t' -v OFS=$'\t' '$3>='$plimit'{print $1}')
+	source_uniq=$(sort -m <(echo $sourcefp | sort) <(echo $targetfp | sort) <(echo $targetfp | sort) | uniq | sed 's/\n/,/g' | awk -F : -v OFS=: '{print "source",$0}')
+	target_uniq=$(sort -m <(echo $sourcefp | sort) <(echo $targetfp | sort) <(echo $sourcetfp | sort) | uniq | sed 's/\n/,/g' | awk -F : -v OFS=: '{print "target",$0}')
+	deltafp=$(cat <(echo $source_uniq) <(echo $target_uniq) | sed 's/\n/###/g')
+	awk -F $'\t' -v OFS=$'\t' '{print $0,"'$deltaion'","'$deltafp'"}' temp/ftaligntemp/filter_net_$tlimit >> temp/ftaligntemp/refilter_net_$tlimit
+	cat <(sort -m <(echo $sourcefp | sort) <(echo $targetfp | sort) <(echo $targetfp | sort) | uniq) <(sort -m <(echo $sourcefp | sort) <(echo $targetfp | sort) <(echo $sourcetfp | sort) | uniq) >> temp/ftalightemp/fpsample;
+	echo "Discrepancy information has been added into <temp/ftalightemp/fpsample>. The connections are $source to $target."
+	done;
+echo "Reformat the output files..."
+############
+sort temp/ftalightemp/fpsample | uniq | awk -v OFS=_ '{print "Frag",$0}' > temp/ftalightemp/refor_fpsample
+st_sample=$(paste <(sed '1d' temp/ftalightemp/refor_fpsample) <(sed '$d' temp/ftalightemp/refor_fpsample))
+############
+cat <(echo source$'\t'target$'\t'tfalign$'\t'similarity$'\t'delta_mass$'\t'deltafp) temp/ftaligntemp/refilter_net_$tlimit <(echo $st_sample) > results/source_target_tree_$tlimit.tsv;
+echo "All instances have written into <results/source_target_tree_$tlimit.tsv>."
+;;
+###################################
+###################################
+###################################
+###################################
+double_ion_network)
+echo "Deff_ion_alignment attempts to align positive and negative ions in terms of fingerprint similarity and retention time, and thereby establish molecular linkages."
+flimit="0"
+dtime="0"
+	until [[ "$flimit" > "0.5" ]] && [[ "$flimit" < "0.99" ]]
+	do
+	read -p "Please enter the minimum similarity of the fingerprint alignment to be filtered. 0.70-0.99 may work well. >>>" flimit;
+	done;
+	until [[ "$dtime" > "0.01" ]] && [[ "$dtime" < "0.30" ]]
+	do
+	read -p "Please enter the rententiontime tolerance. 0.1-0.15 is recommended (C18). >>>" dtime;
+	done;
+mkdir temp/tanitemp;
+a=$(awk 'END{print NF}' tanimoto.tsv);\
+awk -F $'\t' -v OFS=$'\t' '{print $1}' tanimoto.tsv | awk -F _ -v OFS=$'\t' '{print $NF}' > temp/tanitemp/id; \
+paste temp_id <(cut -d $'\t' -f 2- tanimoto.tsv) | sed '1d' > temp/tanitemp/tani; \
+	if [ -f temp/tanitemp/net_$flimit ]
+	then rm temp/tanitemp/net_$flimit
+	fi;\
+echo "Filter and reformat the documents..."
+	for (( i=2; i <= a; i++ ))
+	do
+	target=$( awk -F $'\t' -v OFS=$'\t' '{if(NR=='$i'){print}}' temp/tanitemp/id ); \
+	awk -F $'\t' -v OFS=$'\t' '{print $1,"'$target'",$'$i'}' temp/tanitemp/tani | awk -F $'\t' -v OFS=$'\t' '$1>=0 && $2<=0 || $1<=0 && $2>=0 {print}'| awk -F $'\t' -v OFS=$'\t' '$3>='$flimit' && $3<=0.9999 {print}' >> temp/tanitemp/net_$flimit;
+	echo "The instances have been added into <temp/tanitemp/net_$flimit>. The connections are from $target."
+	done;
+########filter the repetition
+a=$(awk 'END{print NR}' temp/tanitemp/net_$flimit); \
+	if [ -f temp/tanitemp/net_$flimit ];
+	then rm temp/tanitemp/re_net_$flimit
+	fi;\
+echo "Filter the repetation..."
+	for (( i=1; i <= a; i++ ))
+	do
+	awk -F $'\t' -v OFS=$'\t' '{if(NR=='$i'){if($1>$2){print $1,$2,"null",$3}else{print $2,$1,"null",$3}}}' temp/tanitemp/net_$flimit >> temp/tanitemp/re_net_$flimit; \
+	done; \
+sort temp/tanitemp/re_net_$flimit | uniq > temp/tanitemp/filter_net_$flimit;
+#################################
+a=$(awk 'END{print NR}' temp/tanitemp/filter_net_$flimit);\
+	if [ -f temp/tanitemp/refilter_net_$flimit ]
+	then rm temp/tanitemp/refilter_net_$flimit
+	fi;
+echo "Running delta_ion computation..."
+	for (( i=1; i <= a; i++ ))
+	do
+	source=$(awk '{if(NR=='$i'){print $1}}' temp/tanitemp/filter_net_$flimit)
+	sourcert=$(cat _$source/compound.info | grep rt | awk '{print $2}' | awk -F : '{min=$1/60;{print min}}')
+	target=$(awk '{if(NR=='$i'){print $2}}')
+	targetrt=$(cat _$target/compound.info | grep rt | awk '{print $2}' | awk -F : '{min=$1/60;{print min}}')
+	deltart=$(($sourcert-$targetrt))
+	sourceion=$(cat _$source/compound.info | grep ionMass | awk '{print $2}')
+	targetion=$(cat _$target/compound.info | grep ionMass | awk '{print $2}')
+	deltaion=$(($sourceion-$targetion))
+	awk -F $'\t' -v OFS=$'\t' '{if(NR=='$i'){if('$deltart'>=0 && '$deltart'<=0.1 || '$deltart'<=0 && '$deltart'>=-0.1){print $0,"'$deltaion'"}}}' temp/tanitemp/filter_net_$flimit >> temp/tanitemp/refilter_net_$flimit;
+	echo "Discrepancy information has been added into <temp/tanitemp/refilter_net_$flimit>. The connections are $source to $target."
+	done;
+cat <(echo source$'\t'target$'\t'tfalign$'\t'similarity$'\t'delta_mass) temp/tanitemp/refilter_net_$flimit.tsv > results/source_target_simi_$flimit.tsv;
+echo "All instances have written into <results/source_target_simi_$flimit.tsv>."
+;;
+###################################
+###################################
+###################################
+###################################
+*)
+echo "error"
+exit;
+;;
+esac;
+done;#(for)
+done;#(select)
+

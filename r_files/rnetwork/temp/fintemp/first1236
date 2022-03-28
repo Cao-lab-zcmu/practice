@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+YZPJYHCJKCSXBS	InChI=1S/C5H11NO2/c1-2-6-4-3-5(7)8/h6H,2-4H2,1H3,(H,7,8)	C5H11NO2	1	-78.10005522091717	null	CCNCCC(=O)O	-2.5999999		PubChem:(12227201, 25759666); ZINC bio:(ZINC13357318); KEGG Mine:(null)	0.4649658575314065	8589942786	1236	1203_PL20210630_1236

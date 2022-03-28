@@ -1,0 +1,111 @@
+data1=data_chi.tsv
+
+data2=data_eng.tsv
+
+data3=com_lignans_and_iridoids.tsv
+
+tolerance=0.01 # mass_window
+
+awk -F $'\t' '
+ 	{
+ 	if(max=="" || max<FNR)
+ 	 	{
+ 	 	max=FNR
+ 	 	}
+ 	if(NR==FNR)
+ 	 	{
+ 	 	if(FNR==1)
+ 	 	 	{
+ 	 	 	for(i=1; i<=NF; i++)
+ 	 	 	 	{
+ 	 	 	 	if($i~/Num/)
+ 	 	 	 	 	{
+ 	 	 	 	 	num=i
+ 	 	 	 	 	}
+ 	 	 	 	if($i~/Compound/)
+ 	 	 	 	 	{
+ 	 	 	 	 	compound=i
+ 	 	 	 	 	}
+ 	 	 	 	if($i~/Precursor/)
+ 	 	 	 	 	{
+ 	 	 	 	 	precursor=i
+ 	 	 	 	 	}
+ 	 	 	 	}
+ 	 	 	}
+ 	 	if(FNR>=2)
+ 	 	 	{
+ 	 	 	chi_num[FNR]=$num
+ 	 	 	\
+ 	 	 	chi_com[FNR]=$compound
+ 	 	 	\
+ 	 	 	chi_pre[FNR]=$precursor
+ 	 	 	}
+ 	 	}
+ 	if(FILENAME~/eng/)
+ 	 	{
+ 	 	if(FNR==1)
+ 	 	 	{
+ 	 	 	close("'$data1'")
+ 	 	 	\
+ 	 	 	for(i=1; i<=NF; i++)
+ 	 	 	 	{
+ 	 	 	 	if($i~/Num/)
+ 	 	 	 	 	{
+ 	 	 	 	 	num=i
+ 	 	 	 	 	}
+ 	 	 	 	if($i~/Compound/)
+ 	 	 	 	 	{
+ 	 	 	 	 	compound=i
+ 	 	 	 	 	}
+ 	 	 	 	if($i~/Precursor/)
+ 	 	 	 	 	{
+ 	 	 	 	 	precursor=i
+ 	 	 	 	 	}
+ 	 	 	 	}
+ 	 	 	}
+ 	 	if(FNR>=2)
+ 	 	 	{
+ 	 	 	eng_num[FNR]=$num
+ 	 	 	\
+ 	 	 	eng_com[FNR]=$compound
+ 	 	 	\
+ 	 	 	eng_pre[FNR]=$precursor
+ 	 	 	}
+ 	 	}
+ 	if(FILENAME~/com/)
+ 	 	{
+ 	 	if(FNR==1)
+ 	 	 	{
+ 	 	 	close("'$data2'")
+ 	 	 	\
+ 	 	 	printf $0"\t"  "candidate\n"
+ 	 	 	\
+ 	 	 	for(i=1; i<=NF; i++)
+ 	 	 	 	{
+ 	 	 	 	if($i~/m\/z/)
+ 	 	 	 	 	{
+ 	 	 	 	 	mass=i
+ 	 	 	 	 	}
+ 	 	 	 	}
+ 	 	 	}
+ 	 	if(FNR>=2)
+ 	 	 	{
+ 	 	 	printf $0 "\t"
+ 	 	 	\
+ 	 	 	for(i=1; i<=max; i++)
+ 	 	 	 	{
+ 	 	 	 	if($mass>=chi_pre[i]-'$tolerance' && $mass<=chi_pre[i]+'$tolerance')
+ 	 	 	 	 	{
+ 	 	 	 	 	printf chi_num[i]  "_"  chi_com[i]  "_"  chi_pre[i]  " | "
+ 	 	 	 	 	}
+ 	 	 	 	if($mass>=eng_pre[i]-'$tolerance' && $mass<=eng_pre[i]+'$tolerance')
+ 	 	 	 	 	{
+ 	 	 	 	 	printf eng_num[i]  "_"  eng_com[i]  "_"  eng_pre[i]  " | "
+ 	 	 	 	 	}
+ 	 	 	 	}
+ 	 	 	printf "\n"
+ 	 	 	}
+ 	 	}
+ 	}' $data1 $data2 $data3 > identi_1.tsv
+ 	
+ 	

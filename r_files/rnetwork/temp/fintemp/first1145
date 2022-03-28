@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+IVEWTCACRDEAOB	InChI=1S/C9H10O3/c1-12-8-5-3-2-4-7(8)6-9(10)11/h2-5H,6H2,1H3,(H,10,11)	C9H10O3	1	-67.60674638503642	2-(Carboxymethyl)anisole	COC1=CC=CC=C1CC(=O)O	1.4689343	17481906,18540623,18830129	PubChem:(7134, 6950471); ZINC bio:(ZINC00391189); NORMAN:(NS00039538); PubChem class - safety and toxic:(null); PubMed:(null); KEGG Mine:(null)	0.5241538235158287	8657313858	1145	1113_PL20210630_1145

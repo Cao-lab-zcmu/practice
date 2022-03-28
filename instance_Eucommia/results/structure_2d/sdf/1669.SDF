@@ -1,0 +1,181 @@
+ 
+  -OEChem-10192103292D
+
+ 33 33  0     0  0  0  0  0  0999 V2000
+    5.4641    2.2500    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660   -2.2500    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660    0.7500    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5981   -2.2500    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    6.3301    0.7500    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320    2.2500    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0000   -0.7500    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5981    0.7500    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320   -0.7500    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320    0.2500    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5981   -1.2500    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    5.4641    0.2500    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    5.4641   -0.7500    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5981    1.7500    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660   -1.2500    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    5.4641    3.2500    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0000   -2.7500    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    6.3301    3.7500    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0000   -3.7500    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    6.0010   -1.0600    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.2520    3.8326    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.8535    3.1423    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.7880   -2.1674    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.3894   -2.8577    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660    1.3700    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.1350   -2.5600    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.8671    0.4400    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.6401    3.2131    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.8671    4.0600    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.0201    4.2869    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.3800   -3.7500    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0000   -4.3700    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.6200   -3.7500    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+  1 14  1  0  0  0  0
+  1 16  1  0  0  0  0
+  2 15  1  0  0  0  0
+  2 17  1  0  0  0  0
+  3 10  1  0  0  0  0
+  3 25  1  0  0  0  0
+  4 11  1  0  0  0  0
+  4 26  1  0  0  0  0
+  5 12  1  0  0  0  0
+  5 27  1  0  0  0  0
+  6 14  2  0  0  0  0
+  7 15  2  0  0  0  0
+  8 10  2  0  0  0  0
+  8 12  1  0  0  0  0
+  8 14  1  0  0  0  0
+  9 10  1  0  0  0  0
+  9 11  2  0  0  0  0
+  9 15  1  0  0  0  0
+ 11 13  1  0  0  0  0
+ 12 13  2  0  0  0  0
+ 13 20  1  0  0  0  0
+ 16 18  1  0  0  0  0
+ 16 21  1  0  0  0  0
+ 16 22  1  0  0  0  0
+ 17 19  1  0  0  0  0
+ 17 23  1  0  0  0  0
+ 17 24  1  0  0  0  0
+ 18 28  1  0  0  0  0
+ 18 29  1  0  0  0  0
+ 18 30  1  0  0  0  0
+ 19 31  1  0  0  0  0
+ 19 32  1  0  0  0  0
+ 19 33  1  0  0  0  0
+M  END
+> <PUBCHEM_COMPOUND_CID>
+16638293
+
+> <PUBCHEM_COMPOUND_CANONICALIZED>
+1
+
+> <PUBCHEM_CACTVS_COMPLEXITY>
+300
+
+> <PUBCHEM_CACTVS_HBOND_ACCEPTOR>
+7
+
+> <PUBCHEM_CACTVS_HBOND_DONOR>
+3
+
+> <PUBCHEM_CACTVS_ROTATABLE_BOND>
+6
+
+> <PUBCHEM_CACTVS_SUBSKEYS>
+AAADccBwOAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAABAAAAGgAACAAADASgmAIyDoAABgCIAiDSCAACAAAkIAAAiAEGCMgIJzaCNBqCcUAl4BUIuQeI7mzOIAACCAAIAABAAAQQABAAAAAAAAAAAA==
+
+> <PUBCHEM_IUPAC_OPENEYE_NAME>
+diethyl 2,4,6-trihydroxybenzene-1,3-dicarboxylate
+
+> <PUBCHEM_IUPAC_CAS_NAME>
+2,4,6-trihydroxybenzene-1,3-dicarboxylic acid diethyl ester
+
+> <PUBCHEM_IUPAC_NAME_MARKUP>
+diethyl 2,4,6-trihydroxybenzene-1,3-dicarboxylate
+
+> <PUBCHEM_IUPAC_NAME>
+diethyl 2,4,6-trihydroxybenzene-1,3-dicarboxylate
+
+> <PUBCHEM_IUPAC_SYSTEMATIC_NAME>
+diethyl 2,4,6-tris(oxidanyl)benzene-1,3-dicarboxylate
+
+> <PUBCHEM_IUPAC_TRADITIONAL_NAME>
+2,4,6-trihydroxybenzene-1,3-dicarboxylic acid diethyl ester
+
+> <PUBCHEM_IUPAC_INCHI>
+InChI=1S/C12H14O7/c1-3-18-11(16)8-6(13)5-7(14)9(10(8)15)12(17)19-4-2/h5,13-15H,3-4H2,1-2H3
+
+> <PUBCHEM_IUPAC_INCHIKEY>
+QSCLDVJOTHIXFH-UHFFFAOYSA-N
+
+> <PUBCHEM_XLOGP3_AA>
+2.4
+
+> <PUBCHEM_EXACT_MASS>
+270.07395278
+
+> <PUBCHEM_MOLECULAR_FORMULA>
+C12H14O7
+
+> <PUBCHEM_MOLECULAR_WEIGHT>
+270.23
+
+> <PUBCHEM_OPENEYE_CAN_SMILES>
+CCOC(=O)C1=C(C(=C(C=C1O)O)C(=O)OCC)O
+
+> <PUBCHEM_OPENEYE_ISO_SMILES>
+CCOC(=O)C1=C(C(=C(C=C1O)O)C(=O)OCC)O
+
+> <PUBCHEM_CACTVS_TPSA>
+113
+
+> <PUBCHEM_MONOISOTOPIC_WEIGHT>
+270.07395278
+
+> <PUBCHEM_TOTAL_CHARGE>
+0
+
+> <PUBCHEM_HEAVY_ATOM_COUNT>
+19
+
+> <PUBCHEM_ATOM_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ATOM_UDEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_BOND_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_BOND_UDEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ISOTOPIC_ATOM_COUNT>
+0
+
+> <PUBCHEM_COMPONENT_COUNT>
+1
+
+> <PUBCHEM_CACTVS_TAUTO_COUNT>
+-1
+
+> <PUBCHEM_COORDINATE_TYPE>
+1
+5
+255
+
+> <PUBCHEM_BONDANNOTATIONS>
+11  13  8
+12  13  8
+8  10  8
+8  12  8
+9  10  8
+9  11  8
+
+$$$$

@@ -1,0 +1,179 @@
+ 
+  -OEChem-10192103302D
+
+ 36 35  0     1  0  0  0  0  0999 V2000
+    8.9282   -0.0485    0.0000 P   0  0  3  0  0  0  0  0  0  0  0  0
+   10.6603   -0.0485    0.0000 P   0  3  0  0  0  0  0  0  0  0  0  0
+    8.0622   -0.5485    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    8.4282    0.8175    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    9.4282   -0.9145    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+   11.5263   -0.5485    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+   11.1603    0.8175    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+   10.1603   -0.9145    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    9.7942    1.4515    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    5.4641   -0.0485    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5981   -0.5485    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    6.3301   -0.5485    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320   -0.0485    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660   -0.5485    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    7.1962   -0.0485    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0000   -0.0485    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    9.7942    0.4515    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    5.8626    0.4264    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.0656    0.4264    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.1996   -1.0235    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.9966   -1.0235    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.9316   -1.0235    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.7287   -1.0235    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.1306    0.4264    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.3335    0.4264    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    7.5947    0.4264    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.7976    0.4264    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.4675   -1.0235    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.2646   -1.0235    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.3100    0.4884    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.4631    0.2615    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.6900   -0.5855    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    7.8082    0.8175    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+   12.0632   -0.2385    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+   11.7803    0.8175    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+   10.4703   -1.4515    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+  1  3  1  0  0  0  0
+  1  4  1  0  0  0  0
+  1  5  2  0  0  0  0
+  1 17  1  0  0  0  0
+  2  6  1  0  0  0  0
+  2  7  1  0  0  0  0
+  2  8  1  0  0  0  0
+  2 17  1  0  0  0  0
+  3 15  1  0  0  0  0
+  4 33  1  0  0  0  0
+  6 34  1  0  0  0  0
+  7 35  1  0  0  0  0
+  8 36  1  0  0  0  0
+  9 17  2  0  0  0  0
+ 10 11  1  0  0  0  0
+ 10 12  1  0  0  0  0
+ 10 18  1  0  0  0  0
+ 10 19  1  0  0  0  0
+ 11 13  1  0  0  0  0
+ 11 20  1  0  0  0  0
+ 11 21  1  0  0  0  0
+ 12 15  1  0  0  0  0
+ 12 22  1  0  0  0  0
+ 12 23  1  0  0  0  0
+ 13 14  1  0  0  0  0
+ 13 24  1  0  0  0  0
+ 13 25  1  0  0  0  0
+ 14 16  1  0  0  0  0
+ 14 28  1  0  0  0  0
+ 14 29  1  0  0  0  0
+ 15 26  1  0  0  0  0
+ 15 27  1  0  0  0  0
+ 16 30  1  0  0  0  0
+ 16 31  1  0  0  0  0
+ 16 32  1  0  0  0  0
+M  CHG  1   2   1
+M  END
+> <PUBCHEM_COMPOUND_CID>
+56611836
+
+> <PUBCHEM_COMPOUND_CANONICALIZED>
+1
+
+> <PUBCHEM_CACTVS_COMPLEXITY>
+286
+
+> <PUBCHEM_CACTVS_HBOND_ACCEPTOR>
+7
+
+> <PUBCHEM_CACTVS_HBOND_DONOR>
+4
+
+> <PUBCHEM_CACTVS_ROTATABLE_BOND>
+9
+
+> <PUBCHEM_CACTVS_SUBSKEYS>
+AAADceBwOAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGggACCAACACggAICAAAAARAIQAAAAIAAAAAAAAAAAAAAAAAAAAIAAAAAAAAEAAAAAAGAwCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+
+> <PUBCHEM_IUPAC_OPENEYE_NAME>
+[heptoxy(hydroxy)phosphoryl]carbonyl-trihydroxy-phosphonium
+
+> <PUBCHEM_IUPAC_CAS_NAME>
+[[heptoxy(hydroxy)phosphoryl]-oxomethyl]-trihydroxyphosphonium
+
+> <PUBCHEM_IUPAC_NAME_MARKUP>
+[heptoxy(hydroxy)phosphoryl]carbonyl-trihydroxyphosphanium
+
+> <PUBCHEM_IUPAC_NAME>
+[heptoxy(hydroxy)phosphoryl]carbonyl-trihydroxyphosphanium
+
+> <PUBCHEM_IUPAC_SYSTEMATIC_NAME>
+[heptoxy(oxidanyl)phosphoryl]carbonyl-tris(oxidanyl)phosphanium
+
+> <PUBCHEM_IUPAC_TRADITIONAL_NAME>
+[heptoxy(hydroxy)phosphoryl]carbonyl-trihydroxy-phosphonium
+
+> <PUBCHEM_IUPAC_INCHI>
+InChI=1S/C8H18O7P2/c1-2-3-4-5-6-7-15-17(13,14)8(9)16(10,11)12/h10-12H,2-7H2,1H3/p+1
+
+> <PUBCHEM_IUPAC_INCHIKEY>
+XCHARFVBACARAA-UHFFFAOYSA-O
+
+> <PUBCHEM_XLOGP3_AA>
+0.1
+
+> <PUBCHEM_EXACT_MASS>
+289.06060194
+
+> <PUBCHEM_MOLECULAR_FORMULA>
+C8H19O7P2+
+
+> <PUBCHEM_MOLECULAR_WEIGHT>
+289.18
+
+> <PUBCHEM_OPENEYE_CAN_SMILES>
+CCCCCCCOP(=O)(C(=O)[P+](O)(O)O)O
+
+> <PUBCHEM_OPENEYE_ISO_SMILES>
+CCCCCCCOP(=O)(C(=O)[P+](O)(O)O)O
+
+> <PUBCHEM_CACTVS_TPSA>
+124
+
+> <PUBCHEM_MONOISOTOPIC_WEIGHT>
+289.06060194
+
+> <PUBCHEM_TOTAL_CHARGE>
+1
+
+> <PUBCHEM_HEAVY_ATOM_COUNT>
+17
+
+> <PUBCHEM_ATOM_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ATOM_UDEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_BOND_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_BOND_UDEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ISOTOPIC_ATOM_COUNT>
+0
+
+> <PUBCHEM_COMPONENT_COUNT>
+1
+
+> <PUBCHEM_CACTVS_TAUTO_COUNT>
+-1
+
+> <PUBCHEM_COORDINATE_TYPE>
+1
+5
+255
+
+$$$$

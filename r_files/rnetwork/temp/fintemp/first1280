@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+BRIDIXYUUCVCGI	InChI=1S/C8H10O3/c1-5-3-7(10)8(11-2)4-6(5)9/h3-4,9-10H,1-2H3	C8H10O3	1	-96.10934600241987	null	CC1=CC(=C(C=C1O)OC)O	1.5	22101549	PubChem:(13099258); Natural Products:(UNPD25135); COCONUT:(CNP0167756); PubMed:(null); KEGG Mine:(null)	0.4386986199718499	8592064578	1280	1247_PL20210630_1280

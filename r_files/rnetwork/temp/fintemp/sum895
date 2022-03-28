@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+MSOSNPINZZQWRC	InChI=1S/C10H15N8O5P/c11-10-15-8-7(9(19)16-10)13-4-18(8)3-6(1-2-14-17-12)23-5-24(20,21)22/h4,6H,1-3,5H2,(H2,20,21,22)(H3,11,15,16,19)	C10H15N8O5P	1	-181.99832193595782	(S)-2''-Azidoethyl-PMEG	C1=NC2=C(N1CC(CCN=[N+]=[N-])OCP(=O)(O)O)N=C(NC2=O)N	-1.70000005	8410987	PubChem:(135508796, 136714590, 135984358); PubMed:(null)	0.5072825865237577	66	895	865_PL20210630_895

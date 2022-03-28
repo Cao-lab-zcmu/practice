@@ -1,0 +1,134 @@
+ 
+  -OEChem-10192103422D
+
+ 13 13  0     0  0  0  0  0  0999 V2000
+    3.0790    1.2530    0.0000 P   0  3  0  0  0  0  0  0  0  0  0  0
+    2.6723    0.3394    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0000   -1.7296    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    5.5202   -1.7296    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    2.4912    2.0620    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    4.0736    1.3575    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7601   -2.0084    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0
+    4.2601   -0.4696    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0
+    3.2601   -0.4696    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.9511   -1.4206    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5691   -1.4206    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7601   -2.6284    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.7434    2.6284    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+  1  2  1  0  0  0  0
+  1  5  1  0  0  0  0
+  1  6  2  0  0  0  0
+  2  9  1  0  0  0  0
+  3 10  2  0  0  0  0
+  4 11  2  0  0  0  0
+  5 13  1  0  0  0  0
+  7 10  1  0  0  0  0
+  7 11  1  0  0  0  0
+  7 12  1  0  0  0  0
+  8  9  2  0  0  0  0
+  8 11  1  0  0  0  0
+  9 10  1  0  0  0  0
+M  CHG  1   1   1
+M  END
+> <PUBCHEM_COMPOUND_CID>
+67786983
+
+> <PUBCHEM_COMPOUND_CANONICALIZED>
+1
+
+> <PUBCHEM_CACTVS_COMPLEXITY>
+271
+
+> <PUBCHEM_CACTVS_HBOND_ACCEPTOR>
+5
+
+> <PUBCHEM_CACTVS_HBOND_DONOR>
+2
+
+> <PUBCHEM_CACTVS_ROTATABLE_BOND>
+2
+
+> <PUBCHEM_CACTVS_SUBSKEYS>
+AAADcQBDOAIAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAADgAQCCAAAAABgAABAALAARAoQAEwFIIAAAAAAAAAAABAAACCAAAAAAAAAAAABSIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+
+> <PUBCHEM_IUPAC_OPENEYE_NAME>
+(2,5-dioxoimidazol-4-yl)oxy-hydroxy-oxo-phosphonium
+
+> <PUBCHEM_IUPAC_CAS_NAME>
+(2,5-dioxo-4-imidazolyl)oxy-hydroxy-oxophosphonium
+
+> <PUBCHEM_IUPAC_NAME_MARKUP>
+(2,5-dioxoimidazol-4-yl)oxy-hydroxy-oxophosphanium
+
+> <PUBCHEM_IUPAC_NAME>
+(2,5-dioxoimidazol-4-yl)oxy-hydroxy-oxophosphanium
+
+> <PUBCHEM_IUPAC_SYSTEMATIC_NAME>
+[2,5-bis(oxidanylidene)imidazol-4-yl]oxy-oxidanyl-oxidanylidene-phosphanium
+
+> <PUBCHEM_IUPAC_TRADITIONAL_NAME>
+(2,5-diketo-3-imidazolin-4-yl)oxy-hydroxy-keto-phosphonium
+
+> <PUBCHEM_IUPAC_INCHI>
+InChI=1S/C3HN2O5P/c6-1-2(10-11(8)9)5-3(7)4-1/h(H-,4,6,7,8,9)/p+1
+
+> <PUBCHEM_IUPAC_INCHIKEY>
+HYPDCLBMZASJDT-UHFFFAOYSA-O
+
+> <PUBCHEM_XLOGP3_AA>
+-0.9
+
+> <PUBCHEM_EXACT_MASS>
+176.97013317
+
+> <PUBCHEM_MOLECULAR_FORMULA>
+C3H2N2O5P+
+
+> <PUBCHEM_MOLECULAR_WEIGHT>
+177.03
+
+> <PUBCHEM_OPENEYE_CAN_SMILES>
+C1(=O)C(=NC(=O)N1)O[P+](=O)O
+
+> <PUBCHEM_OPENEYE_ISO_SMILES>
+C1(=O)C(=NC(=O)N1)O[P+](=O)O
+
+> <PUBCHEM_CACTVS_TPSA>
+105
+
+> <PUBCHEM_MONOISOTOPIC_WEIGHT>
+176.97013317
+
+> <PUBCHEM_TOTAL_CHARGE>
+1
+
+> <PUBCHEM_HEAVY_ATOM_COUNT>
+11
+
+> <PUBCHEM_ATOM_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ATOM_UDEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_BOND_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_BOND_UDEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ISOTOPIC_ATOM_COUNT>
+0
+
+> <PUBCHEM_COMPONENT_COUNT>
+1
+
+> <PUBCHEM_CACTVS_TAUTO_COUNT>
+-1
+
+> <PUBCHEM_COORDINATE_TYPE>
+1
+5
+255
+
+$$$$

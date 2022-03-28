@@ -1,0 +1,2 @@
+inchikey2D	inchi	molecularFormula	rank	score	name	smiles	xlogp	PubMedIds	links	tanimotoSimilarity	dbflags	id	filename
+BTKSUULMJNNXHG	InChI=1S/C5H11NO2/c1-3-8-5(7)4-6-2/h6H,3-4H2,1-2H3	C5H11NO2	1	-61.68745670420252	ethyl n-methylglycinate	CCOC(=O)CNC	0.100000001	12182659	PubChem:(95849, 6950552, 58603896); ZINC bio:(ZINC00391928); NORMAN:(NS00032539); additional:(null); PubChem class - safety and toxic:(null); Training Set:(null); PubMed:(null)	0.5799008943416827	67919938	455	445_PL20210630_455

@@ -1,2 +1,2 @@
-# MCnebula
-MCnebula algorithm for LC-MS analysis.
+# practice
+practice R or bash
